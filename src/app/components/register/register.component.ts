@@ -8,7 +8,7 @@ import { InputBoxComponent } from '../../components/input-box/input-box.componen
 })
 export class RegisterComponent implements OnInit {
 
-  public canSeeRegisterModal : boolean = false;
+  public canSeeRegisterModal : boolean = true;
   public phonePatternInfo = [
     {
       pattern: /1\d{10}/,
