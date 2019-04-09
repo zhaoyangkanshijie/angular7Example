@@ -1,0 +1,30 @@
+<div class="modal" *ngIf="canSeeRegisterModal">
+  <div class="register">
+    <img class="close" src="../../../assets/close_normal.png" alt="close" (click)="canSeeRegisterModal = false" />
+    <div class="container">
+      <h3 class="title">注册</h3>
+      <input-box class="input-box" subtitle="手机号" inputType="text" inputName="phone" 
+      required="手机号不能为空" [patternInfo]=phonePatternInfo #phone></input-box>
+      <input-box class="input-box" subtitle="密码" inputType="password" inputName="password" 
+      required="密码不能为空" [patternInfo]=passwordPatternInfo #password></input-box>
+      <input-box class="input-box" subtitle="确认密码" inputType="password" inputName="password2" 
+      required="确认密码不能为空" [patternInfo]=password2PatternInfo (beforeBlur)="syncPassword($event)" #password2></input-box>
+      <input-box class="input-box" subtitle="验证码" inputType="text" inputName="code" 
+      required="验证码不能为空" [patternInfo]=codePatternInfo #code>
+        <img class="code" src="../../../assets/close_normal.png" alt="code" />
+      </input-box>
+      <input-box class="input-box" subtitle="短信验证码" inputType="text" inputName="message" 
+      required="短信验证码不能为空" #message>
+        <p class="message" [ngClass]="{'disabled': messageDisabled}" (click)="sendMessage()">{{messageWord}}</p>
+      </input-box>
+      <p class="reg" (click)="registerSubmitData()">注册</p>
+      <div class="other">
+        <div class="agreement">
+          <div class="agree" [ngClass]="{'checked': agree}" (click)="agree = !agree;agreeError = false;"></div>
+          <a class="word" [ngClass]="{'error': agreeError}" href="#">同意zhaoyangkanshijie用户注册协议</a>
+        </div>
+        <p class="login">立即登录</p>
+      </div>
+    </div>
+  </div>
+</div>
