@@ -30,6 +30,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## 组件
 
 ### inputBox
+
+![inputBox](./inputbox.gif)
+
 1. 功能描述
 
 inputBox组件由标题、可变类型输入框、错误提示三部分组成，适用于数据填写与校验，减少提交数据的复杂度。
