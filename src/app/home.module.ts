@@ -18,6 +18,7 @@ import { InputBoxComponent } from './components/input-box/input-box.component';
 import { RegisterComponent } from './components/register/register.component';
 
 import { MyHtmlPipe } from './pipes/myhtml.pipe';
+import { StylePipeComponent } from './pages/style-pipe/style-pipe.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MyHtmlPipe } from './pipes/myhtml.pipe';
     OtherComponent,
     InputBoxComponent,
     RegisterComponent,
-    MyHtmlPipe
+    MyHtmlPipe,
+    StylePipeComponent
   ],
   imports: [
     BrowserModule,

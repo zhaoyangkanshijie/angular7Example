@@ -129,6 +129,35 @@ inputBox组件由标题、可变类型输入框、错误提示三部分组成，
 
 ## 其它功能
 
+### 管道：带样式文本
+页面显示
+```js
+public value : String = "Hello <span style=\"color: #0096FF;\">World</span>"
+
+<p [innerHtml] = "value | myHtml"></p>
+```
+管道(需全局引用)
+```js
+import { Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer } from "@angular/platform-browser";
+
+@Pipe({
+  name: "myHtml"
+})
+
+export class MyHtmlPipe implements PipeTransform {
+
+  constructor (private sanitizer: DomSanitizer) {
+
+  }
+  
+  transform(html) {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+
+}
+```
+
 ### 配置nginx
 ```txt
     server {
