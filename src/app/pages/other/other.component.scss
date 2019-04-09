@@ -1,0 +1,16 @@
+.main{
+    min-height: 850px;
+    margin-top: 50px;
+
+    .container{
+        width: 980px;
+        margin: 0 auto;
+
+        a{
+            display: block;
+            color: black;
+            padding: 16px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+    }
+}
