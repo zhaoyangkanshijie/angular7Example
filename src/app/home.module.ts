@@ -10,15 +10,20 @@ import { StorageService } from './services/storage.service';
 import { Home } from './home.component';
 
 import { HeaderComponent } from './components/header/header.component';
+import { RegisterComponent } from './components/register/register.component';
+import { InputBoxComponent } from './components/input-box/input-box.component';
+import { SelectBoxComponent } from './components/select-box/select-box.component';
+
 import { IndexComponent } from './pages/index/index.component';
 import { MyComponentComponent } from './pages/my-component/my-component.component';
 import { PageComponent } from './pages/page/page.component';
 import { OtherComponent } from './pages/other/other.component';
-import { InputBoxComponent } from './components/input-box/input-box.component';
-import { RegisterComponent } from './components/register/register.component';
+import { StylePipeComponent } from './pages/style-pipe/style-pipe.component';
+import { FillingComponent } from './pages/filling/filling.component';
 
 import { MyHtmlPipe } from './pipes/myhtml.pipe';
-import { StylePipeComponent } from './pages/style-pipe/style-pipe.component';
+
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,10 @@ import { StylePipeComponent } from './pages/style-pipe/style-pipe.component';
     InputBoxComponent,
     RegisterComponent,
     MyHtmlPipe,
-    StylePipeComponent
+    StylePipeComponent,
+    SelectBoxComponent,
+    ClickOutsideDirective,
+    FillingComponent
   ],
   imports: [
     BrowserModule,

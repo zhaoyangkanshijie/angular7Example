@@ -123,6 +123,29 @@ inputBox组件由标题、可变类型输入框、错误提示三部分组成，
 * getSubmitState：是否可提交，是否校验完全通过
 * showServerInfo：显示服务器返回错误
 
+### selectBox
+
+![selectBox](./selectbox.gif)
+
+1. 功能描述
+
+selectBox组件模拟select-option，并添加了错误提示。
+
+2. 技术面
+* 自定义指令Directive
+* 元素引用ElementRef
+* 自定义事件HostListener
+
+3. 组件属性
+* 默认提示文字：defaultWord : String
+* 默认报错：defaultHint : String
+* 选项[{内容，是否选中}]：InitOption=[{detail:string,status:boolean}]
+
+4. 父组件可调用方法
+* getVal：获取当前选中值
+* showServerHint：显示服务器返回错误
+* hideOption：隐藏选项
+
 ## 页面
 
 ### 待更新

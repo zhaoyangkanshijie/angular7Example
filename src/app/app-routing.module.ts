@@ -6,6 +6,7 @@ import { PageComponent } from './pages/page/page.component';
 import { OtherComponent } from './pages/other/other.component';
 import { RegisterComponent } from './components/register/register.component';
 import { StylePipeComponent } from './pages/style-pipe/style-pipe.component';
+import { FillingComponent } from './pages/filling/filling.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'stylePipe',
     component: StylePipeComponent
+  },
+  {
+    path: 'filling',
+    component: FillingComponent
   }
 ];
 

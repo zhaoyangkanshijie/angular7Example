@@ -1,0 +1,10 @@
+<div class="selectBox" (clickOutside)="optionOpen=false">
+  <p class="box" (click)="optionOpen=true;showHint=false;" [ngClass]="{'open':(optionOpen&&!showHint),'error':showHint,'selected':currentOption!=-1}">{{word}}</p>
+  <p class="hint" *ngIf="showHint">{{hint}}</p>
+  <ul class="selection" *ngIf="optionOpen">
+    <li class="item" *ngFor="let item of option;let i = index;" (click)="selectItem(i)">
+      <div class="status" [ngClass]="{'selected':item.status}"></div>
+      <p class="detail">{{item.detail}}</p>
+    </li>
+  </ul>
+</div>
