@@ -1,5 +1,6 @@
 .selectBox{
     position: relative;
+    height: 32px;
 
     .box{
         font-size: 13px;
@@ -29,6 +30,10 @@
         color: #333333;
     }
 
+    .box.disabled{
+        background: #f5f5f5 url('../../../assets/dropdown_normal_grey.png') top 7px right 10px no-repeat;
+    }
+
     .hint{
         float: left;
         background-color: #FAECEB;
@@ -37,6 +42,33 @@
         color: #FF3232;
         line-height: 18px;
         margin-left: 12px;
+    }
+
+    .checkbox{
+        float: left;
+        height: 32px;
+        width: 100px;
+        margin-left: 16px;
+
+        .check{
+            margin: 8px 4px 0 0;
+            width: 16px;
+            height: 16px;
+            float: left;
+            cursor: pointer;
+            background-image: url('../../../assets/Checkbox_unchecked.png');
+        }
+
+        .check.choose{
+            background-image: url('../../../assets/Checkbox_checked.png');
+        }
+
+        .word{
+            font-size: 14px;
+            line-height: 32px;
+            color: #333333;
+            float: left;
+        }
     }
 
     .selection{

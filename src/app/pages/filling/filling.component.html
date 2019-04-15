@@ -1,4 +1,5 @@
 <div class="main">
-  <select-box class="select-box" defaultWord="选择" defaultHint="错误信息" [InitOption]="option" #child></select-box>
-  <button (click)="child.showServerHint('错误信息')">点击出现错误信息</button>
+  <select-box class="select-box1" defaultWord="选择" defaultHint="错误信息" [InitOption]="option" #child1></select-box>
+  <select-box class="select-box2" defaultWord="选择结束时间" defaultHint="选择结束时间" [InitOption]="option" [time]="true" #child2></select-box>
+  <button (click)="child1.showServerHint('错误信息');child2.showServerHint('错误信息');">点击出现错误信息</button>
 </div>

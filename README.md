@@ -137,12 +137,14 @@ selectBox组件模拟select-option，并添加了错误提示。
 * 自定义事件HostListener
 
 3. 组件属性
+* 是否出现右侧勾选框：time : boolean
 * 默认提示文字：defaultWord : String
 * 默认报错：defaultHint : String
 * 选项[{内容，是否选中}]：InitOption=[{detail:string,status:boolean}]
 
 4. 父组件可调用方法
 * getVal：获取当前选中值
+* getSubmitStatus：获取提交状态
 * showServerHint：显示服务器返回错误
 * hideOption：隐藏选项
 

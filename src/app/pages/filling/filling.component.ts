@@ -9,11 +9,11 @@ export class FillingComponent implements OnInit {
 
   public option = [
     {
-      detail : 'aaa',
+      detail : '2019-01-23',
       status : false
     },
     {
-      detail : 'bbb',
+      detail : '2020-04-05',
       status : false
     }
   ]

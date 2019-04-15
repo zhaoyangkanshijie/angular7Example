@@ -11,11 +11,17 @@ export class SelectBoxComponent implements OnInit {
   private hint : String = '';
   private showHint : boolean = false;
   private optionOpen : boolean = false;
+  private disabled : boolean = false;
   private option = [];
   private currentOption : number = -1;
+  private submitStatus : boolean = false;
 
   @Input()
+  time : boolean = false;
+  @Input()
   defaultWord : String = '';
+  @Input()
+  defaultCheckboxValue : String = '';
   @Input()
   defaultHint : String = '';
   @Input()
@@ -27,6 +33,16 @@ export class SelectBoxComponent implements OnInit {
     this.word = this.defaultWord;
     this.hint = this.defaultHint;
     this.option = this.InitOption;
+  }
+
+  boxClick(){
+    if(this.disabled){
+      this.optionOpen=false;
+    }
+    else{
+      this.optionOpen=!this.optionOpen;
+    }
+    this.showHint=false;
   }
 
   selectItem(index){
@@ -43,12 +59,45 @@ export class SelectBoxComponent implements OnInit {
     this.optionOpen = false;
   }
 
-  getVal() {
-    for(let i = 0;i < this.option.length;i++){
-      if(this.option[i].status){
-        return this.option[i].detail;
-      }
+  checkClick(){
+    this.disabled=!this.disabled;
+    if(this.disabled){
+      this.submitStatus = true;
     }
+    else if(this.currentOption != -1){
+      this.submitStatus = true;
+    }
+    else{
+      this.submitStatus = false;
+    }
+  }
+
+  getShowVal() {
+    if(this.disabled){
+      return "至今";
+    }
+    else if(this.currentOption != -1){
+      return this.option[this.currentOption].detail;
+    }
+    else{
+      return this.defaultWord;
+    }
+  }
+
+  getVal() {
+    if(this.disabled){
+      return "至今";
+    }
+    else if(this.currentOption != -1){
+      return this.option[this.currentOption].detail;
+    }
+    else{
+      return "";
+    }
+  }
+
+  getSubmitStatus(){
+    return this.submitStatus;
   }
 
   showServerHint(serverHint) {
