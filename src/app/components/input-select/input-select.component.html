@@ -1,0 +1,7 @@
+<div class="inputSelect" (clickOutside)="optionOpen=false">
+  <input class="in" [placeholder]="defaultWord" [ngModel]="val" (ngModelChange)="valtrim($event)" (click)="boxClick()" [ngClass]="{'error':showHint}" />
+  <p class="hint" *ngIf="showHint">{{hint}}</p>
+  <div class="selection" *ngIf="optionOpen">
+    <p class="item" *ngFor="let item of option;let i = index;" (click)="selectItem(i)">{{item.detail}}</p>
+  </div>
+</div>

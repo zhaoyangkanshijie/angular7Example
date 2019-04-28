@@ -1,0 +1,47 @@
+.simpleInput{
+    height: 32px;
+
+    .in{
+        float: left;
+        width: 318px;
+        height: 32px;
+        background-color: #FFFFFF;
+        border: 1px solid #CCCCCC;
+        border-radius: 2px;
+        padding: 7px 10px;
+        box-sizing: border-box;
+        color: #333333;
+        caret-color: #0096FF;
+    }
+
+    .in:focus{
+        border: 1px solid #0096FF;
+    }
+
+    .in::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color: #999999;
+    }
+    .in:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: #999999;
+    }
+    .in::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: #999999;
+    }
+    .in:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #999999;
+    }
+
+    .in.error{
+        border: 1px solid #FF3232;
+    }
+
+    .hint{
+        float: left;
+        background-color: #FAECEB;
+        padding: 7px 12px;
+        font-size: 12px;
+        color: #FF3232;
+        line-height: 18px;
+        margin-left: 12px;
+    }
+}

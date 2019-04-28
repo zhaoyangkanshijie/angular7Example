@@ -31,7 +31,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ### inputBox
 
-![inputBox](./inputbox.gif)
+![inputBox](./examples/inputbox.gif)
 
 1. 功能描述
 
@@ -125,7 +125,7 @@ inputBox组件由标题、可变类型输入框、错误提示三部分组成，
 
 ### selectBox
 
-![selectBox](./selectbox.gif)
+![selectBox](./examples/selectbox.gif)
 
 1. 功能描述
 
@@ -147,6 +147,99 @@ selectBox组件模拟select-option，并添加了错误提示。
 * getSubmitStatus：获取提交状态
 * showServerHint：显示服务器返回错误
 * hideOption：隐藏选项
+
+### inputSelect
+
+![inputSelect](./examples/inputselect.gif)
+
+1. 功能描述
+
+inputSelect组件用于input输入时带提示，类似自动填充autocomplete，并添加了错误提示。
+
+2. 技术面
+* 自定义指令Directive
+* 元素引用ElementRef
+* 自定义input
+
+3. 组件属性
+* 默认提示文字：defaultWord : String
+* 默认值：defaultValue : String
+* 默认报错：defaultHint : String
+* 选项[{内容，是否选中}]：InitOption=[{detail:string,status:boolean}]
+
+4. 父组件可调用方法
+* getVal：获取当前选中值
+* getSubmitStatus：获取提交状态
+* showServerInfo：显示服务器返回错误
+
+### radioBox
+
+![radioBox](./examples/radiobox.gif)
+
+1. 功能描述
+
+radioBox组件模拟input radio功能，能自定义样式，并添加了错误提示。
+
+2. 技术面
+* 自定义input
+
+3. 组件属性
+* 默认选项：defaultIndex : number
+* 默认报错：defaultHint : String
+* 选项[{内容，是否选中}]：InitOption=[{detail:string,status:boolean}]
+
+4. 父组件可调用方法
+* getVal：获取当前选中值
+* getSubmitStatus：获取提交状态
+* showServerInfo：显示服务器返回错误
+
+### simpleInput
+
+![simpleInput](./examples/simpleinput.gif)
+
+1. 功能描述
+
+simpleInput组件简化inputBox功能，提供简便的输入与错误提示。
+
+2. 技术面
+* 自定义input
+
+3. 组件属性
+* 默认提示文字：defaultWord : String
+* 默认值：defaultValue : String
+* 默认报错：defaultHint : String
+* 数据校验规则 patternInfo: Array 同inputBox
+
+4. 父组件可调用方法
+* getVal：获取当前选中值
+* getSubmitStatus：获取提交状态
+* showServerInfo：显示服务器返回错误
+
+### dateSelector
+
+![dateSelector](./examples/dateselector.gif)
+
+1. 功能描述
+
+dateSelector组件模拟input date功能，提供自定义样式与错误提示。
+
+2. 技术面
+* 自定义input
+* js date操作
+* css js 梯级样式
+
+3. 组件属性
+* 是否选择勾选框值：toNow : String
+* 起始年份：startYear : number
+* 结束年份：startYear : number
+* 勾选框值：defaultCheckboxValue : String
+* 默认值：defaultValue : String
+* 默认报错：defaultHint : String
+
+4. 父组件可调用方法
+* getVal：获取当前选中值
+* getSubmitStatus：获取提交状态
+* showServerInfo：显示服务器返回错误
 
 ## 页面
 

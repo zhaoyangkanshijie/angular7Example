@@ -1,0 +1,5 @@
+<div class="main">
+  <date-selector class="begin" startYear="1980" endYear="2000" defaultValue="选择入学时间" defaultHint="请选择入学时间" #child1> </date-selector>
+  <date-selector class="end" startYear="1980" endYear="2000" defaultValue="选择毕业时间（获得学位证/毕业证）"  defaultCheckboxValue="至今" defaultHint="请选择毕业时间" [toNow]="true" #child2> </date-selector>
+  <button (click)="child1.showServerInfo('错误信息');child2.showServerInfo('错误信息');">点击出现错误信息</button>
+</div>

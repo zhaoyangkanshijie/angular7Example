@@ -1,0 +1,5 @@
+<div class="simpleInput">
+  <input class="in" [placeholder]="defaultWord" type="text" [ngModel]="val" (ngModelChange)="valtrim($event)" 
+  [ngClass]="{'error':showHint}" (blur)="blurAction()" (focus)="focusAction()" />
+  <p class="hint" *ngIf="showHint">{{hint}}</p>
+</div>

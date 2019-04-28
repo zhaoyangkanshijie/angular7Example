@@ -7,6 +7,10 @@ import { OtherComponent } from './pages/other/other.component';
 import { RegisterComponent } from './components/register/register.component';
 import { StylePipeComponent } from './pages/style-pipe/style-pipe.component';
 import { FillingComponent } from './pages/filling/filling.component';
+import { DateComponent } from './pages/date/date.component';
+import { SelectionComponent } from './pages/selection/selection.component';
+import { RadioComponent } from './pages/radio/radio.component';
+import { InputComponent } from './pages/input/input.component';
 
 const routes: Routes = [
   {
@@ -40,6 +44,22 @@ const routes: Routes = [
   {
     path: 'filling',
     component: FillingComponent
+  },
+  {
+    path: 'date',
+    component: DateComponent
+  },
+  {
+    path: 'selection',
+    component: SelectionComponent
+  },
+  {
+    path: 'radio',
+    component: RadioComponent
+  },
+  {
+    path: 'input',
+    component: InputComponent
   }
 ];
 
