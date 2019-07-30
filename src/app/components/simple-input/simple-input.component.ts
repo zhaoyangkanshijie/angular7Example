@@ -140,17 +140,26 @@ export class SimpleInputComponent implements OnInit {
     }
   }
 
+  getHint() {
+    return this.hint;
+  }
+
   getVal() {
     return this.val.trim();
   }
 
-  getSubmitState() {
+  getSubmitStatus() {
     return this.submitStatus;
   }
 
   showServerInfo(serverInfo) {
     this.showHint = true;
     this.hint = serverInfo;
+  }
+
+  setVal(value){
+    this.val = value;
+    this.submitStatus = true;
   }
 
 }

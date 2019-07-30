@@ -120,7 +120,7 @@ inputBox组件由标题、可变类型输入框、错误提示三部分组成，
 * focusAction：focus逻辑（emit事件）
 * blurAction：blur逻辑（emit事件、数据校验、可提交标志）
 * getVal：获取input value
-* getSubmitState：是否可提交，是否校验完全通过
+* getSubmitStatus：是否可提交，是否校验完全通过
 * showServerInfo：显示服务器返回错误
 
 ### selectBox
@@ -144,8 +144,10 @@ selectBox组件模拟select-option，并添加了错误提示。
 
 4. 父组件可调用方法
 * getVal：获取当前选中值
+* setVal：设置值
 * getSubmitStatus：获取提交状态
 * showServerHint：显示服务器返回错误
+* getHint：获取提示文字
 * hideOption：隐藏选项
 
 ### inputSelect
@@ -169,8 +171,10 @@ inputSelect组件用于input输入时带提示，类似自动填充autocomplete�
 
 4. 父组件可调用方法
 * getVal：获取当前选中值
+* setVal：设置值
 * getSubmitStatus：获取提交状态
 * showServerInfo：显示服务器返回错误
+* getHint：获取提示文字
 
 ### radioBox
 
@@ -190,8 +194,10 @@ radioBox组件模拟input radio功能，能自定义样式，并添加了错误�
 
 4. 父组件可调用方法
 * getVal：获取当前选中值
+* setVal：设置值
 * getSubmitStatus：获取提交状态
 * showServerInfo：显示服务器返回错误
+* getHint：获取提示文字
 
 ### simpleInput
 
@@ -212,8 +218,10 @@ simpleInput组件简化inputBox功能，提供简便的输入与错误提示。
 
 4. 父组件可调用方法
 * getVal：获取当前选中值
+* setVal：设置值
 * getSubmitStatus：获取提交状态
 * showServerInfo：显示服务器返回错误
+* getHint：获取提示文字
 
 ### dateSelector
 
@@ -238,12 +246,73 @@ dateSelector组件模拟input date功能，提供自定义样式与错误提示�
 
 4. 父组件可调用方法
 * getVal：获取当前选中值
+* setVal：设置值
 * getSubmitStatus：获取提交状态
 * showServerInfo：显示服务器返回错误
+* getHint：获取提示文字
+
+### keyValue
+
+![keyValue](./examples/keyvalue.gif)
+
+1. 功能描述
+
+keyValue组件用于填写键值的功能，输出值为(key)value，提供自定义样式与错误提示。
+
+2. 技术面
+* input box与select box结合体，可参见之前的组件
+
+3. 组件属性
+* 键类型：keyType : String
+* 值类型：valueType : String
+* 键对象：keyObject : {}
+* 值对象：valueObject : {}
+* 键是否必填：defaultKeyRequired : Boolean
+* 值是否必填：defaultValueRequired : Boolean
+* 默认值：defaultValue : String
+
+4. 父组件可调用方法
+* getVal：获取当前选中值
+* setVal：设置值
+* getSubmitStatus：获取提交状态
+* showServerInfo：显示服务器返回错误
+* getHint：获取提示文字
+
+### simpleTextarea
+
+![simpleTextarea](./examples/simpletextarea.gif)
+
+1. 功能描述
+
+simpleTextarea组件拓展textarea功能，能额外统计和限制字数，提供自定义样式与错误提示。
+
+2. 技术面
+* 自定义textarea
+
+3. 组件属性
+* 初始值：inputValue : String
+* 提示文字：placeholder : String
+* 字数限制：limit : number
+* 是否必填：require : Boolean
+* 默认值：defaultValue : String
+
+4. 父组件可调用方法
+* getVal：获取当前选中值
+* setVal：设置值
+* getSubmitStatus：获取提交状态
+* showServerInfo：显示服务器返回错误
+* getHint：获取提示文字
 
 ## 页面
 
-### 待更新
+### 组件增删改查
+
+1. 技术面
+* for if配合使用
+* ViewChildren
+* ChangeDetectorRef
+* 查找data与ViewChildren对应函数indexOfN
+* 对象深克隆deepClone
 
 ## 其它功能
 

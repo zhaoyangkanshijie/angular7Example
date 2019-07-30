@@ -65,7 +65,7 @@ export class InputSelectComponent implements OnInit {
     this.optionOpen = false;
   }
   
-  getSubmitState() {
+  getSubmitStatus() {
     return this.submitStatus;
   }
 

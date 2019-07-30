@@ -11,6 +11,9 @@ import { DateComponent } from './pages/date/date.component';
 import { SelectionComponent } from './pages/selection/selection.component';
 import { RadioComponent } from './pages/radio/radio.component';
 import { InputComponent } from './pages/input/input.component';
+import { DictionaryComponent } from './pages/dictionary/dictionary.component';
+import { TextareaComponent } from './pages/textarea/textarea.component';
+import { CrudComponent } from './pages/crud/crud.component';
 
 const routes: Routes = [
   {
@@ -60,6 +63,18 @@ const routes: Routes = [
   {
     path: 'input',
     component: InputComponent
+  },
+  {
+    path: 'dictionary',
+    component: DictionaryComponent
+  },
+  {
+    path: 'textarea',
+    component: TextareaComponent
+  },
+  {
+    path: 'crud',
+    component: CrudComponent
   }
 ];
 

@@ -26,6 +26,8 @@ export class SelectBoxComponent implements OnInit {
   defaultHint : String = '';
   @Input()
   InitOption = [];
+  @Input()
+  defaultIndex : number = -1;
 
   constructor() { }
 
@@ -33,6 +35,12 @@ export class SelectBoxComponent implements OnInit {
     this.word = this.defaultWord;
     this.hint = this.defaultHint;
     this.option = this.InitOption;
+    if(this.defaultIndex != -1){
+      this.currentOption = this.defaultIndex;
+      this.option[this.currentOption].status = true;
+      this.word = this.option[this.currentOption].detail;
+      this.submitStatus = true;
+    }
   }
 
   boxClick(){
@@ -51,6 +59,7 @@ export class SelectBoxComponent implements OnInit {
         this.option[i].status = true;
         this.currentOption = index;
         this.word = this.option[i].detail;
+        this.submitStatus = true;
       }
       else{
         this.option[i].status = false;
@@ -70,11 +79,12 @@ export class SelectBoxComponent implements OnInit {
     else{
       this.submitStatus = false;
     }
+    this.optionOpen=false;
   }
 
   getShowVal() {
     if(this.disabled){
-      return "至今";
+      return this.defaultCheckboxValue;
     }
     else if(this.currentOption != -1){
       return this.option[this.currentOption].detail;
@@ -86,7 +96,7 @@ export class SelectBoxComponent implements OnInit {
 
   getVal() {
     if(this.disabled){
-      return "至今";
+      return this.defaultCheckboxValue;
     }
     else if(this.currentOption != -1){
       return this.option[this.currentOption].detail;
@@ -96,17 +106,46 @@ export class SelectBoxComponent implements OnInit {
     }
   }
 
+  getHint() {
+    return this.hint;
+  }
+
   getSubmitStatus(){
     return this.submitStatus;
   }
 
-  showServerHint(serverHint) {
+  showServerInfo(serverHint) {
     this.showHint = true;
     this.hint = serverHint;
   }
 
   hideOption(){
     this.optionOpen = false;
+  }
+
+  setVal(value){
+    if(this.time && value == this.defaultCheckboxValue){
+      this.disabled = true;
+      this.word = value;
+      this.submitStatus = true;
+    }
+    else{
+      let index = -1;
+      for(let i = 0;i < this.option.length;i++){
+        if(value == this.option[i].detail){
+          index = i;
+        }
+      }
+      if(index != -1){
+        this.currentOption = index;
+        this.option[this.currentOption].status = true;
+        this.word = this.option[this.currentOption].detail;
+        this.submitStatus = true;
+      }
+      else{
+        this.submitStatus = false;
+      }
+    }
   }
 
 }

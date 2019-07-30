@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit {
   }
 
   registerValidateData() {
-    if(this.account.getSubmitState() && this.password.getSubmitState() && this.password2.getSubmitState() && this.code.getSubmitState() && this.message.getSubmitState()){
+    if(this.account.getSubmitStatus() && this.password.getSubmitStatus() && this.password2.getSubmitStatus() && this.code.getSubmitStatus() && this.message.getSubmitStatus()){
       if(!this.agree){
         this.agreeError = true;
         return false;

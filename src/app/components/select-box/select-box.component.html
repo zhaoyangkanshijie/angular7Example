@@ -3,7 +3,7 @@
   <p class="hint" *ngIf="showHint">{{hint}}</p>
   <div class="checkbox" *ngIf="!showHint&&time">
     <div class="check" (click)="checkClick()" [ngClass]="{'choose':disabled}"></div>
-    <p class="word">至今</p>
+    <p class="word">{{defaultCheckboxValue}}</p>
   </div>
   <ul class="selection" *ngIf="optionOpen&&!disabled">
     <li class="item" *ngFor="let item of option;let i = index;" (click)="selectItem(i)">

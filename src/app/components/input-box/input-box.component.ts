@@ -199,7 +199,7 @@ export class InputBoxComponent implements OnInit {
     return this.val.trim();
   }
 
-  getSubmitState() {
+  getSubmitStatus() {
     return this.canSubmit;
   }
 

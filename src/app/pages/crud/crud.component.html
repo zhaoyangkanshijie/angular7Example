@@ -1,0 +1,12 @@
+<div class="main">
+  <div class="progress" *ngFor="let item of data;let i = index;">
+    <simple-input class="simple-input" defaultHint="请填写信息" #children *ngIf="status[i] == 0"></simple-input>
+    <p class="word" *ngIf="status[i] == 1">{{data[i]}}</p>
+    <div class="operation">
+      <button class="save" (click)="save(i)" *ngIf="status[i] == 0">保存</button>
+      <button class="edit" (click)="edit(i)" *ngIf="status[i] == 1">编辑</button>
+      <button class="delete" (click)="delete(i)" *ngIf="status[i] == 1">删除</button>
+    </div>
+  </div>
+  <button class="add" (click)="add()">添加</button>
+</div>

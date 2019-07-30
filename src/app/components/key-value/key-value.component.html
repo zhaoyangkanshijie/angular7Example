@@ -1,0 +1,23 @@
+<div class="keyValue" (clickOutside)="keySelect.optionOpen=false;valueSelect.optionOpen=false;">
+  <div class="key">
+    <input class="input" type="text" [placeholder]="keyInput.placeholder" *ngIf="keyType=='input'" [ngModel]="keyInput.value" (ngModelChange)="trimKey($event)" 
+    (focus)="focusAction()" (blur)="blurAction(true)" [ngClass]="{'error':showHint}" />
+    <div class="select" *ngIf="keyType=='select'">
+      <p class="box" (click)="boxClick(true)" [ngClass]="{'open':(keySelect.optionOpen&&!showHint),'error':showHint,'selected':(keySelect.currentOption!=-1)}">{{keySelect.word}}</p>
+      <div class="selection" *ngIf="keySelect.optionOpen">
+        <p class="item" *ngFor="let item of keySelect.option;let i = index;" (click)="selectItem(i,true)">{{item.detail}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="value">
+    <input class="input" type="text" [placeholder]="valueInput.placeholder" *ngIf="valueType=='input'" [ngModel]="valueInput.value" (ngModelChange)="trimValue($event)"
+    (focus)="focusAction()" (blur)="blurAction(false)" [ngClass]="{'error':showHint}" />
+    <div class="select" *ngIf="valueType=='select'">
+      <p class="box" (click)="boxClick(false)" [ngClass]="{'open':(valueSelect.optionOpen&&!showHint),'error':showHint,'selected':(valueSelect.currentOption!=-1)}">{{valueSelect.word}}</p>
+      <div class="selection" *ngIf="valueSelect.optionOpen">
+        <p class="item" *ngFor="let item of valueSelect.option;let i = index;" (click)="selectItem(i,false)">{{item.detail}}</p>
+      </div>
+    </div>
+  </div>
+  <p class="hint" *ngIf="showHint">{{hint}}</p>
+</div>

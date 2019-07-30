@@ -32,6 +32,10 @@ export class RadioBoxComponent implements OnInit {
     return this.option[this.currentOption].detail;
   }
 
+  getHint() {
+    return this.hint;
+  }
+
   selectItem(index){
     for(let i = 0;i < this.option.length;i++){
       if(i == index){
@@ -46,13 +50,30 @@ export class RadioBoxComponent implements OnInit {
     this.showHint = false;
   }
   
-  getSubmitState() {
+  getSubmitStatus() {
     return this.submitStatus;
   }
 
   showServerInfo(serverInfo) {
     this.showHint = true;
     this.hint = serverInfo;
+  }
+
+  setVal(value){
+    let index = -1;
+    for(let i = 0;i < this.option.length;i++){
+      if(value == this.option[i].detail){
+        index = i;
+      }
+    }
+    if(index != -1){
+      this.currentOption = index;
+      this.option[this.currentOption].status = true;
+      this.submitStatus = true;
+    }
+    else{
+      this.submitStatus = false;
+    }
   }
 
 }

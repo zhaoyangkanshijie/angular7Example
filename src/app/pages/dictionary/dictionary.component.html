@@ -1,0 +1,11 @@
+<div class="main">
+  <key-value class="key-value1" keyType="input" valueType="input" [keyObject]="name1" [valueObject]="phone1" 
+    [defaultKeyRequired]="true" [defaultValueRequired]="true" defaultHint="内容填写不完整" #child1> </key-value>
+  <key-value class="key-value2" keyType="input" valueType="select" [keyObject]="name2" [valueObject]="phone2" 
+  [defaultKeyRequired]="true" [defaultValueRequired]="true" defaultHint="内容填写不完整" #child2> </key-value>
+  <key-value class="key-value3" keyType="select" valueType="input" [keyObject]="name3" [valueObject]="phone3" 
+  [defaultKeyRequired]="true" [defaultValueRequired]="true" defaultHint="内容填写不完整" #child3> </key-value>
+  <key-value class="key-value4" keyType="select" valueType="select" [keyObject]="name4" [valueObject]="phone4" 
+  [defaultKeyRequired]="true" [defaultValueRequired]="true" defaultHint="内容填写不完整" #child4> </key-value>
+  <button (click)="showServerInfo('错误信息');">点击出现错误信息</button>
+</div>

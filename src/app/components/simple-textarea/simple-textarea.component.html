@@ -1,0 +1,8 @@
+<div class="simpleTextarea">
+  <textarea class="detail" [maxlength]="limit" [ngModel]="val" (ngModelChange)="valsubstr($event)"
+   [ngClass]="{'error':showHint}" (blur)="blurAction()" (focus)="focusAction()" [placeholder]="placeholder">{{val}}</textarea>
+  <div class="right">
+    <p class="hint" *ngIf="showHint">{{hint}}</p>
+    <p class="limit" *ngIf="!showHint">{{len}}/{{limit}}</p>
+  </div>
+</div>

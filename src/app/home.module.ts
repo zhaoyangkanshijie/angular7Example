@@ -17,6 +17,8 @@ import { SimpleInputComponent } from './components/simple-input/simple-input.com
 import { RadioBoxComponent } from './components/radio-box/radio-box.component';
 import { InputSelectComponent } from './components/input-select/input-select.component';
 import { DateSelectorComponent } from './components/date-selector/date-selector.component';
+import { SimpleTextareaComponent } from './components/simple-textarea/simple-textarea.component';
+import { KeyValueComponent } from './components/key-value/key-value.component';
 
 import { IndexComponent } from './pages/index/index.component';
 import { MyComponentComponent } from './pages/my-component/my-component.component';
@@ -28,6 +30,9 @@ import { DateComponent } from './pages/date/date.component';
 import { SelectionComponent } from './pages/selection/selection.component';
 import { RadioComponent } from './pages/radio/radio.component';
 import { InputComponent } from './pages/input/input.component';
+import { DictionaryComponent } from './pages/dictionary/dictionary.component';
+import { TextareaComponent } from './pages/textarea/textarea.component';
+import { CrudComponent } from './pages/crud/crud.component';
 
 import { MyHtmlPipe } from './pipes/myhtml.pipe';
 
@@ -55,7 +60,12 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     DateComponent,
     SelectionComponent,
     RadioComponent,
-    InputComponent
+    InputComponent,
+    DictionaryComponent,
+    TextareaComponent,
+    SimpleTextareaComponent,
+    KeyValueComponent,
+    CrudComponent
   ],
   imports: [
     BrowserModule,

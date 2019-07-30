@@ -69,6 +69,7 @@ export class DateSelectorComponent implements OnInit {
       this.submitStatus = true;
     }
     else{
+      this.val = this.defaultValue.trim();
       this.submitStatus = false;
     }
     this.yearOpen=false;
@@ -123,6 +124,7 @@ export class DateSelectorComponent implements OnInit {
       this.yearOpen=false;
       this.monthOpen=false;
       this.dayOpen=false;
+      this.submitStatus = true;
     }
   }
 
@@ -214,16 +216,64 @@ export class DateSelectorComponent implements OnInit {
   }
 
   getVal() {
+    //this.val = this.selectedYear+'年'+this.selectedMonth+'月'+this.selectedDay+'日';
+    //return this.selectedYear+'年'+this.selectedMonth+'月'+this.selectedDay+'日';
     return this.val.trim();
   }
 
-  getSubmitState() {
+  getHint() {
+    return this.hint;
+  }
+
+  getSubmitStatus() {
     return this.submitStatus;
   }
 
   showServerInfo(serverInfo) {
     this.showHint = true;
     this.hint = serverInfo;
+  }
+
+  setVal(value){
+    console.log(value)
+    if(value == "至今"){
+      this.val = value;
+      this.disabled = true;
+      this.submitStatus = true;
+    }
+    else{
+      let date = new Date(value);
+      if(date.toString() == "Invalid Date"){
+        if(value.includes("年")&&value.includes("月")&&value.includes("日")){
+          let arr = value.split(/[年月日]/).filter(d=>d).map(Number);
+          if(arr.length == 3 && typeof arr[0] == 'number' && typeof arr[1] == 'number' && typeof arr[2] == 'number' && arr[0] >= this.startYear && arr[0] <= this.endYear){
+            this.selectedYear = arr[0];
+            this.selectedMonth = arr[1];
+            this.selectedDay = arr[2];
+            this.fillDay();
+            this.val = arr[0] + '-' + arr[1].toString().padStart(2, '0') + '-' + arr[2].toString().padStart(2, '0');
+            this.submitStatus = true;
+          }
+          else{
+            this.submitStatus = false;
+          }
+        }
+        else{
+          this.submitStatus = false;
+        }
+      }
+      else{
+        let year = date.getFullYear();
+        let month = date.getMonth();
+        let day = date.getDay();
+        this.selectedYear = year;
+        this.selectedMonth = month;
+        this.selectedDay = day;
+        this.fillDay();
+        this.val = year + '-' + month.toString().padStart(2, '0') + '-' + day.toString().padStart(2, '0');
+        this.submitStatus = true;
+      }
+    }
   }
 
 }
