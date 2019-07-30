@@ -307,6 +307,8 @@ simpleTextarea组件拓展textarea功能，能额外统计和限制字数，提�
 
 ### 组件增删改查
 
+![crud](./examples/crud.gif)
+
 1. 技术面
 * for if配合使用
 * ViewChildren
