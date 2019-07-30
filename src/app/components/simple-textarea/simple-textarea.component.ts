@@ -50,12 +50,6 @@ export class SimpleTextareaComponent implements OnInit {
   valsubstr(e) {
     this.val = e.substring(0, this.limit);
     this.len = this.val.length;
-    if(this.val != "" && !this.showHint){
-      this.submitStatus = true;
-    }
-    else{
-      this.submitStatus = false;
-    }
   }
 
   getVal() {
@@ -72,6 +66,12 @@ export class SimpleTextareaComponent implements OnInit {
   }
 
   getSubmitStatus() {
+    if(this.val != "" || (!this.require && this.val == "") && !this.showHint){
+      this.submitStatus = true;
+    }
+    else{
+      this.submitStatus = false;
+    }
     return this.submitStatus;
   }
 

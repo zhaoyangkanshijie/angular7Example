@@ -222,7 +222,12 @@ export class KeyValueComponent implements OnInit {
         val2 = this.valueSelect.word;
       }
     }
-    return '(' + val1 + ')' + val2;
+    if(val1 == '' && val2 == ''){
+      return '';
+    }
+    else{
+      return '(' + val1 + ')' + val2;
+    }
   }
 
   setVal(value){
