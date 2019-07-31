@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import _ from 'lodash';
 
 @Component({
   selector: 'key-value',
@@ -60,16 +61,20 @@ export class KeyValueComponent implements OnInit {
 
   initFillData() {
     if(this.keyType == 'input'){
-      this.keyInput = this.keyObject;
+      //this.keyInput = JSON.parse(JSON.stringify(this.keyObject));
+      this.keyInput = _.cloneDeep(this.keyObject);
     }
     else{
-      this.keySelect = this.keyObject;
+      //this.keySelect = JSON.parse(JSON.stringify(this.keyObject));
+      this.keySelect = _.cloneDeep(this.keyObject);
     }
     if(this.valueType == 'input'){
-      this.valueInput = this.valueObject;
+      //this.valueInput = JSON.parse(JSON.stringify(this.valueObject));
+      this.valueInput = _.cloneDeep(this.valueObject);
     }
     else{
-      this.valueSelect = this.valueObject;
+      //this.valueSelect = JSON.parse(JSON.stringify(this.valueObject));
+      this.valueSelect = _.cloneDeep(this.valueObject);
     }
     this.isKeyRequired = this.defaultKeyRequired;
     this.isValueRequired = this.defaultValueRequired;
@@ -81,18 +86,21 @@ export class KeyValueComponent implements OnInit {
 
   blurAction(isKey){
     let patternInfo = [];
+    let value = '';
     if(isKey){
       patternInfo = this.keyInput.patternInfo;
+      value = this.keyInput.value;
     }
     else{
       patternInfo = this.valueInput.patternInfo;
+      value = this.valueInput.value;
     }
     // 循环匹配每项规则是否正确
     if(patternInfo != null){
       for(let i = 0;i < patternInfo.length;i++){
         // 匹配到正则表达式，则显示错误
         if(typeof patternInfo[i].pattern == 'object'){
-          if(!patternInfo[i].pattern.test(this.val)){
+          if(!patternInfo[i].pattern.test(value)){
             this.showHint = true;
             this.hint = patternInfo[i].info;
             break;
@@ -103,7 +111,7 @@ export class KeyValueComponent implements OnInit {
           if(patternInfo[i].option){
             //相等显示错误
             if(patternInfo[i].option == '='){
-              if(this.val == patternInfo[i].pattern){
+              if(value == patternInfo[i].pattern){
                 this.showHint = true;
                 this.hint = patternInfo[i].info;
                 break;
@@ -111,7 +119,7 @@ export class KeyValueComponent implements OnInit {
             }
             //不等显示错误
             else{
-              if(this.val != patternInfo[i].pattern){
+              if(value != patternInfo[i].pattern){
                 this.showHint = true;
                 this.hint = patternInfo[i].info;
                 break;
@@ -120,7 +128,7 @@ export class KeyValueComponent implements OnInit {
           }
           //默认不等显示错误
           else{
-            if(this.val != patternInfo[i].pattern){
+            if(value != patternInfo[i].pattern){
               this.showHint = true;
               this.hint = patternInfo[i].info;
               break;
@@ -132,7 +140,7 @@ export class KeyValueComponent implements OnInit {
           if(patternInfo[i].option){
             //大于指定长度
             if(patternInfo[i].option == '>'){
-              if(this.val.length > patternInfo[i].pattern){
+              if(value.length > patternInfo[i].pattern){
                 this.showHint = true;
                 this.hint = patternInfo[i].info;
                 break;
@@ -140,7 +148,7 @@ export class KeyValueComponent implements OnInit {
             }
             //等于指定长度
             else if(patternInfo[i].option == '='){
-              if(this.val.length == patternInfo[i].pattern){
+              if(value.length == patternInfo[i].pattern){
                 this.showHint = true;
                 this.hint = patternInfo[i].info;
                 break;
@@ -148,7 +156,7 @@ export class KeyValueComponent implements OnInit {
             }
             //小于指定长度
             else{
-              if(this.val.length < patternInfo[i].pattern){
+              if(value.length < patternInfo[i].pattern){
                 this.showHint = true;
                 this.hint = patternInfo[i].info;
                 break;
@@ -157,7 +165,7 @@ export class KeyValueComponent implements OnInit {
           }
           //默认小于指定长度
           else{
-            if(this.val.length < patternInfo[i].pattern){
+            if(value.length < patternInfo[i].pattern){
               this.showHint = true;
               this.hint = patternInfo[i].info;
               break;
@@ -231,50 +239,69 @@ export class KeyValueComponent implements OnInit {
   }
 
   setVal(value){
-    let valueSum = value;
-    let valueArr = valueSum.replace('(','').split(')');
-    let value1 = valueArr[0];
-    let value2 = valueArr[1];
-    
-    if(this.keyType == 'input'){
-      this.keyInput.value = value1;
-    }
-    else{
-      let index = -1;
-      for(let i = 0;i < this.keySelect.option.length;i++){
-        if(value1 == this.keySelect.option[i].detail){
-          index = i;
-        }
-      }
-      if(index != -1){
-        this.keySelect.currentOption = index;
-        this.keySelect.option[this.keySelect.currentOption].status = true;
-        this.keySelect.word = this.keySelect.option[this.keySelect.currentOption].detail;
+    if(value == ''){
+      if(this.keyType == 'input'){
+        this.keyInput.value = '';
       }
       else{
         this.keySelect.currentOption = -1;
-        this.keySelect.word = '';
+        this.keySelect.word = this.keyObject.word;
       }
-    }
 
-    if(this.valueType == 'input'){
-      this.valueInput.value = value2;
-    }
-    else{
-      let index = -1;
-      for(let i = 0;i < this.valueSelect.option.length;i++){
-        if(value1 == this.valueSelect.option[i].detail){
-          index = i;
-        }
-      }
-      if(index != -1){
-        this.valueSelect.currentOption = index;
-        this.valueSelect.option[this.valueSelect.currentOption].status = true;
-        this.valueSelect.word = this.valueSelect.option[this.valueSelect.currentOption].detail;
+      if(this.valueType == 'input'){
+        this.valueInput.value = '';
       }
       else{
         this.valueSelect.currentOption = -1;
-        this.valueSelect.word = '';
+        this.valueSelect.word = this.valueObject.word;
+      }
+    }
+    else{
+      let valueSum = value;
+      let valueArr = valueSum.replace('(','').split(')');
+      let value1 = valueArr[0];
+      let value2 = valueArr[1];
+      
+      if(this.keyType == 'input'){
+        this.keyInput.value = value1;
+      }
+      else{
+        let index = -1;
+        for(let i = 0;i < this.keySelect.option.length;i++){
+          if(value1 == this.keySelect.option[i].detail){
+            index = i;
+          }
+        }
+        if(index != -1){
+          this.keySelect.currentOption = index;
+          this.keySelect.option[this.keySelect.currentOption].status = true;
+          this.keySelect.word = this.keySelect.option[this.keySelect.currentOption].detail;
+        }
+        else{
+          this.keySelect.currentOption = -1;
+          this.keySelect.word = this.keyObject.word;
+        }
+      }
+  
+      if(this.valueType == 'input'){
+        this.valueInput.value = value2;
+      }
+      else{
+        let index = -1;
+        for(let i = 0;i < this.valueSelect.option.length;i++){
+          if(value1 == this.valueSelect.option[i].detail){
+            index = i;
+          }
+        }
+        if(index != -1){
+          this.valueSelect.currentOption = index;
+          this.valueSelect.option[this.valueSelect.currentOption].status = true;
+          this.valueSelect.word = this.valueSelect.option[this.valueSelect.currentOption].detail;
+        }
+        else{
+          this.valueSelect.currentOption = -1;
+          this.valueSelect.word = this.valueObject.word;
+        }
       }
     }
   }
