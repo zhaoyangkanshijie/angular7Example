@@ -132,12 +132,6 @@ export class SimpleInputComponent implements OnInit {
 
   valtrim(e){
     this.val = e.trim();
-    if(this.val != "" && !this.showHint){
-      this.submitStatus = true;
-    }
-    else{
-      this.submitStatus = false;
-    }
   }
 
   getHint() {
@@ -149,6 +143,13 @@ export class SimpleInputComponent implements OnInit {
   }
 
   getSubmitStatus() {
+    this.blurAction();
+    if(!this.showHint){
+      this.submitStatus = true;
+    }
+    else{
+      this.submitStatus = false;
+    }
     return this.submitStatus;
   }
 
