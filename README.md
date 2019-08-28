@@ -347,6 +347,76 @@ export class MyHtmlPipe implements PipeTransform {
 }
 ```
 
+### 服务
+service
+```ts
+import { Injectable } from '@angular/core';
+import { Subject, Subscription, Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class StorageService {
+  private subject = new Subject<any>();
+  
+  sendMessage(message:string){
+    this.subject.next({message:message});
+  }
+
+  clearMessage(){
+    this.subject.next();
+  }
+
+  getMessage():Observable<any> {
+    return this.subject.asObservable();
+  }
+
+  constructor(){}
+
+}
+```
+
+componentA
+```ts
+import { Component, OnInit } from '@angular/core';
+import { StorageService } from '../../services/storage.service';
+
+@Component({
+  selector: 'service',
+  templateUrl: './service.component.html',
+  styleUrls: ['./service.component.scss']
+})
+export class ServiceComponent implements OnInit {
+
+  constructor(private storage: StorageService) { }
+
+  ngOnInit() {
+    this.storage.sendMessage('errorLogout');
+  }
+
+}
+```
+
+componentB
+```ts
+import { StorageService } from '../../services/storage.service';
+import { Subject, Subscription, Observable } from 'rxjs';
+
+...
+
+constructor(private storage: StorageService ) { }
+
+ngAfterViewInit() {
+    this.subscription = this.storage.getMessage().subscribe(
+      msg => {
+        console.log(msg);
+        // do else in this component
+      });
+    }
+
+...
+```
+
 ### 配置nginx
 ```txt
     server {

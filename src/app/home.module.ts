@@ -33,6 +33,7 @@ import { InputComponent } from './pages/input/input.component';
 import { DictionaryComponent } from './pages/dictionary/dictionary.component';
 import { TextareaComponent } from './pages/textarea/textarea.component';
 import { CrudComponent } from './pages/crud/crud.component';
+import { ServiceComponent } from './pages/service/service.component';
 
 import { MyHtmlPipe } from './pipes/myhtml.pipe';
 
@@ -65,7 +66,8 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     TextareaComponent,
     SimpleTextareaComponent,
     KeyValueComponent,
-    CrudComponent
+    CrudComponent,
+    ServiceComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { CookieService } from 'ngx-cookie-service';
+import { Subject, Subscription, Observable } from 'rxjs';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'header',
@@ -23,12 +25,21 @@ export class HeaderComponent implements OnInit {
 
   public boxState: String = 'close';
   public name: String = '';
+  public subscription : Subscription;
   
-  constructor( private cookieService: CookieService ) { }
+  constructor( private cookieService: CookieService, private storage: StorageService ) { }
 
   ngOnInit() {
-    this.name = this.cookieService.get( 'tp-link' );;
+    this.name = this.cookieService.get( 'tp-link' );
   }
+
+  ngAfterViewInit() {
+    this.subscription = this.storage.getMessage().subscribe(
+      msg => {
+        console.log(msg);
+        // do else in this component
+      });
+    }
 
   public changeState() { 
     this.boxState = this.boxState == 'close' ? 'open' : 'close'; 

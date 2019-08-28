@@ -14,6 +14,7 @@ import { InputComponent } from './pages/input/input.component';
 import { DictionaryComponent } from './pages/dictionary/dictionary.component';
 import { TextareaComponent } from './pages/textarea/textarea.component';
 import { CrudComponent } from './pages/crud/crud.component';
+import { ServiceComponent } from './pages/service/service.component';
 
 const routes: Routes = [
   {
@@ -75,6 +76,10 @@ const routes: Routes = [
   {
     path: 'crud',
     component: CrudComponent
+  },
+  {
+    path: 'service',
+    component: ServiceComponent
   }
 ];
 
