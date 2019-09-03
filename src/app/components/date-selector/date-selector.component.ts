@@ -235,7 +235,6 @@ export class DateSelectorComponent implements OnInit {
   }
 
   setVal(value){
-    console.log(value)
     if(value == "至今"){
       this.val = value;
       this.disabled = true;
@@ -264,8 +263,8 @@ export class DateSelectorComponent implements OnInit {
       }
       else{
         let year = date.getFullYear();
-        let month = date.getMonth();
-        let day = date.getDay();
+        let month = date.getMonth()+1;
+        let day = date.getDate();
         this.selectedYear = year;
         this.selectedMonth = month;
         this.selectedDay = day;
