@@ -135,7 +135,14 @@ export class DateSelectorComponent implements OnInit {
   }
 
   fillDay(){
-    let nowDate = this.selectedYear+'-'+this.selectedMonth+'-01';
+    let nowDate;
+    //兼容ie
+    if(this.selectedMonth < 10){
+      nowDate = this.selectedYear+'-0'+this.selectedMonth+'-01';
+    }
+    else{
+      nowDate = this.selectedYear+'-'+this.selectedMonth+'-01';
+    }
     let offset = this.getDay(nowDate);
     let now = 1;
     nowDate = this.getNextDate(nowDate,-1);
