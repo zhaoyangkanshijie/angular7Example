@@ -90,6 +90,7 @@
             top: 0px;
             left: 0px;
             -ms-overflow-style: none;
+            scrollbar-width: none;
 
             .yearItem{
                 width: 70px;
@@ -114,6 +115,12 @@
         }
 
         .year::-webkit-scrollbar {
+            display: none;
+        }
+        .year::-o-scrollbar {
+            display: none;
+        }
+        .year::-moz-scrollbar {
             display: none;
         }
 
