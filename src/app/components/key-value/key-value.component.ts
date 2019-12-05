@@ -238,6 +238,42 @@ export class KeyValueComponent implements OnInit {
     }
   }
 
+  getKeyVal() {
+    let val1 = '';
+    if(this.keyType == 'input'){
+      val1 = this.keyInput.value.trim();
+    }
+    else{
+      if(this.keySelect.word != this.keyObject.word){
+        val1 = this.keySelect.word;
+      }
+    }
+    if(val1 == ''){
+      return '';
+    }
+    else{
+      return val1;
+    }
+  }
+
+  getValueVal() {
+    let val2 = '';
+    if(this.valueType == 'input'){
+      val2 = this.valueInput.value.trim();
+    }
+    else{
+      if(this.valueSelect.word == this.valueObject.word){
+        val2 = this.valueSelect.word;
+      }
+    }
+    if(val2 == ''){
+      return '';
+    }
+    else{
+      return val2;
+    }
+  }
+
   setVal(value){
     if(value == ''){
       if(this.keyType == 'input'){
@@ -344,32 +380,23 @@ export class KeyValueComponent implements OnInit {
       return false;
     }
     else{
-      if(this.isKeyRequired){
-        if(this.keyType == 'select'){
-          if(this.keySelect.currentOption == -1){
-            return false;
-          }
+      if(this.isKeyRequired || this.isValueRequired){
+        if(this.getKeyVal() && this.getValueVal()){
+          return true;
         }
         else{
-          if(this.keyInput.value == ''){
-            return false;
-          }
+          return false;
         }
       }
-      if(this.isValueRequired){
-        if(this.valueType == 'select'){
-          if(this.valueSelect.currentOption == -1){
-            return false;
-          }
+      else{
+        if((!this.getKeyVal() && !this.getValueVal()) || (this.getKeyVal() && this.getValueVal())){
+          return true;
         }
         else{
-          if(this.valueInput.value == ''){
-            return false;
-          }
+          return false;
         }
       }
     }
-    return true;
   }
 
   showServerInfo(serverInfo) {
