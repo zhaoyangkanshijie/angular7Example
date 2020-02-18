@@ -19,67 +19,83 @@ import { ServiceComponent } from './pages/service/service.component';
 const routes: Routes = [
   {
     path: '',
-    component: IndexComponent
+    component: IndexComponent,
+    data: { state: 'index' }
   },
   {
     path: 'index',
-    component: IndexComponent
+    component: IndexComponent,
+    data: { state: 'index' }
   },
   {
     path: 'myComponent',
-    component: MyComponentComponent
+    component: MyComponentComponent,
+    data: { state: 'myComponent' }
   },
   {
     path: 'page',
-    component: PageComponent
+    component: PageComponent,
+    data: { state: 'page' }
   },
   {
     path: 'other',
-    component: OtherComponent
+    component: OtherComponent,
+    data: { state: 'other' }
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    data: { state: 'register' }
   },
   {
     path: 'stylePipe',
-    component: StylePipeComponent
+    component: StylePipeComponent,
+    data: { state: 'stylePipe' }
   },
   {
     path: 'filling',
-    component: FillingComponent
+    component: FillingComponent,
+    data: { state: 'filling' }
   },
   {
     path: 'date',
-    component: DateComponent
+    component: DateComponent,
+    data: { state: 'date' }
   },
   {
     path: 'selection',
-    component: SelectionComponent
+    component: SelectionComponent,
+    data: { state: 'selection' }
   },
   {
     path: 'radio',
-    component: RadioComponent
+    component: RadioComponent,
+    data: { state: 'radio' }
   },
   {
     path: 'input',
-    component: InputComponent
+    component: InputComponent,
+    data: { state: 'input' }
   },
   {
     path: 'dictionary',
-    component: DictionaryComponent
+    component: DictionaryComponent,
+    data: { state: 'dictionary' }
   },
   {
     path: 'textarea',
-    component: TextareaComponent
+    component: TextareaComponent,
+    data: { state: 'textarea' }
   },
   {
     path: 'crud',
-    component: CrudComponent
+    component: CrudComponent,
+    data: { state: 'crud' }
   },
   {
     path: 'service',
-    component: ServiceComponent
+    component: ServiceComponent,
+    data: { state: 'service' }
   }
 ];
 

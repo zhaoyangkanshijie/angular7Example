@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import {trigger, state, transition, style, animate} from '@angular/animations';
 import axios from 'axios';
+import { routerTransition } from './router.animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  animations: [routerTransition]
 })
 export class Home implements OnInit{
   title = 'campus';
 
   public value: String = "a";
-  public boxState: String = 'close';
+  public pageState: String = 'close';
 
   constructor( private cookieService: CookieService ) { }
 
@@ -28,5 +31,9 @@ export class Home implements OnInit{
 
   accept(msg:string){
     console.log(msg)
+  }
+
+  getState(outlet) {
+    return outlet.activatedRouteData.state;
   }
 }

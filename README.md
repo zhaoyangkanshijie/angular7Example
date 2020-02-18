@@ -449,3 +449,62 @@ import axios from 'axios';
 
 providers: [CookieService]
 ```
+
+### 页面过渡动画
+
+![viewAnimation](./examples/viewAnimation.gif)
+
+引入包@angular/animations`
+
+home.module.ts全局引用
+```js
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+@NgModule({
+  imports: [ BrowserModule, BrowserAnimationsModule, ... ],
+  declarations: [  ... ],
+  bootstrap: [ ... ]
+})
+```
+
+router.animations.ts动画文件
+```txt
+状态切换为:":enter"和":leave"
+group是动画并行同步
+```
+
+home.component.html主页面
+```html
+<!-- [@动画名称]="状态改变函数" -->
+<div id="app" [@routerTransition]="getState(o)">
+    <router-outlet #o="outlet"></router-outlet>
+</div>
+<!-- #o="outlet" 中outlet可获取底层RouterOutlet-->
+```
+
+home.component.ts
+```js
+import { routerTransition } from './router.animations';
+@Component({
+  selector: 'app-root',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
+  animations: [routerTransition]
+})
+...
+  getState(outlet) {
+    return outlet.activatedRouteData.state;
+  }
+```
+
+app-routing.module.ts路由配置改变的参数
+```js
+{
+  path: 'index',
+  component: IndexComponent,
+  data: { state: 'index' }
+}
+...
+```

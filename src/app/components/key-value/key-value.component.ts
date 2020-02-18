@@ -59,7 +59,7 @@ export class KeyValueComponent implements OnInit {
     this.hint = this.defaultHint;
   }
 
-  ngOnChanges(changes: SimpleChange){
+  ngOnChanges(){
     //整个@input对象改变才能触发，只改变对象属性值不能触发
     this.initFillData();
     this.hint = this.defaultHint;

@@ -71,9 +71,9 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [CookieService,StorageService],
   bootstrap: [Home]
