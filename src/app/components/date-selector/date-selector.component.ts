@@ -264,6 +264,20 @@ export class DateSelectorComponent implements OnInit {
             this.submitStatus = false;
           }
         }
+        else if(value.includes("-")){
+          let arr = value.split("-").filter(d=>d).map(Number);
+          if(arr.length == 3 && typeof arr[0] == 'number' && typeof arr[1] == 'number' && typeof arr[2] == 'number' && arr[0] >= this.startYear && arr[0] <= this.endYear){
+            this.selectedYear = arr[0];
+            this.selectedMonth = arr[1];
+            this.selectedDay = arr[2];
+            this.fillDay();
+            this.val = arr[0] + '-' + (arr[1] < 10 ? '0' + arr[1].toString() : arr[1].toString()) + '-' + (arr[2] < 10 ? '0' + arr[2].toString() : arr[2].toString());
+            this.submitStatus = true;
+          }
+          else{
+            this.submitStatus = false;
+          }
+        }
         else{
           this.submitStatus = false;
         }
