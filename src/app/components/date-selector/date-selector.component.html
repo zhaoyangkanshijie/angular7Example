@@ -1,5 +1,5 @@
 <div class="dateSelector" (clickOutside)="yearOpen=false;monthOpen=false;dayOpen=false;">
-    <p class="box" (click)="boxClick()" [ngClass]="{'open':(yearOpen&&!showHint&&!disabled),'error':showHint,'selected':(selectedYear>0&&!disabled),'disabled':disabled}">{{getVal()}}</p>
+    <p class="box" (click)="boxClick()" [ngClass]="{'open':(yearOpen&&!showHint&&!disabled),'error':showHint,'selected':((selectedYear>0&&selectedMonth>0&&selectedDay>0)&&!disabled),'disabled':disabled}">{{getVal()}}</p>
     <p class="hint" *ngIf="showHint">{{hint}}</p>
     <div class="checkbox" *ngIf="!showHint&&toNow">
         <div class="check" (click)="checkClick()" [ngClass]="{'choose':disabled}"></div>
@@ -7,10 +7,10 @@
     </div>
     <div class="date">
         <div class="year" *ngIf="yearOpen" (mouseenter)="yearEnter()">
-            <p class="yearItem" *ngFor="let yearItem of year;let i = index;" [ngClass]="{'selected':yearClass(yearItem)}" (click)="yearClick(yearItem,$event)">{{yearItem}}</p>
+            <p class="yearItem" *ngFor="let yearItem of year;let i = index;" [ngClass]="{'selected':yearClass(yearItem)}" (click)="yearClick(yearItem,$event)" (mouseenter)="mouseEnterProxy('year',yearItem,$event)" (mouseleave)="clearTimer()">{{yearItem}}</p>
         </div>
         <div class="month" *ngIf="monthOpen" (mouseenter)="monthEnter()" [ngStyle]="{'top':yearOffsetTop}">
-            <p class="monthItem" *ngFor="let monthItem of month;let j = index;" [ngClass]="{'selected':monthClass(monthItem)}" (click)="monthClick(monthItem,$event)">{{monthItem}}</p>
+            <p class="monthItem" *ngFor="let monthItem of month;let j = index;" [ngClass]="{'selected':monthClass(monthItem)}" (click)="monthClick(monthItem,$event)" (mouseenter)="mouseEnterProxy('month',yearItem,$event)" (mouseleave)="clearTimer()">{{monthItem}}</p>
         </div>
         <div class="calendar" *ngIf="dayOpen" [ngStyle]="{'top':monthOffsetTop}">
             <div class="week">

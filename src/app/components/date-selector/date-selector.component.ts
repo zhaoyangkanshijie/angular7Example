@@ -24,6 +24,8 @@ export class DateSelectorComponent implements OnInit {
   private monthOffsetTop : string = '0px';
   private disabled : boolean = false;
   private submitStatus : boolean = false;
+  private timer = null;
+  private timeout : number = 0;
 
   @Input()
   toNow : boolean = false;
@@ -37,12 +39,15 @@ export class DateSelectorComponent implements OnInit {
   defaultValue: String = '';
   @Input()
   defaultHint : String = '';
+  @Input()
+  hoverTime : number = 0;
 
   constructor() { }
 
   ngOnInit() {
     this.val = this.defaultValue.trim();
     this.hint = this.defaultHint;
+    this.timeout = this.hoverTime;
     this.fillYear();
   }
 
@@ -76,6 +81,25 @@ export class DateSelectorComponent implements OnInit {
     this.monthOpen=false;
     this.dayOpen=false;
     this.showHint=false;
+  }
+
+  mouseEnterProxy(time,item,e) {
+    if(this.timer){
+      this.clearTimer();
+    }
+    if(this.timeout == 0){
+      time == 'year' ? this.yearClick(item,e) : this.monthClick(item,e);
+    }
+    else{
+      this.timer = setTimeout(() => {
+        time == 'year' ? this.yearClick(item,e) : this.monthClick(item,e);
+      }, this.timeout);
+    }
+  }
+
+  clearTimer() {
+    clearTimeout(this.timer);
+    this.timer = null;
   }
 
   yearEnter(){

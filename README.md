@@ -243,6 +243,7 @@ dateSelector组件模拟input date功能，提供自定义样式与错误提示�
 * 勾选框值：defaultCheckboxValue : String
 * 默认值：defaultValue : String
 * 默认报错：defaultHint : String
+* 悬停在年份或月份?ms展示下一级：hoverTime : number
 
 4. 父组件可调用方法
 * getVal：获取当前选中值
