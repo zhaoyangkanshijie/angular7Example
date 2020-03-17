@@ -281,7 +281,8 @@ export class DateSelectorComponent implements OnInit {
             this.selectedMonth = arr[1];
             this.selectedDay = arr[2];
             this.fillDay();
-            this.val = arr[0] + '-' + arr[1].toString().padStart(2, '0') + '-' + arr[2].toString().padStart(2, '0');
+            this.val = arr[0] + '-' + (arr[1] < 10 ? '0' + arr[1].toString() : arr[1].toString()) + '-' + (arr[2] < 10 ? '0' + arr[2].toString() : arr[2].toString());
+            //this.val = arr[0] + '-' + arr[1].toString().padStart(2, '0') + '-' + arr[2].toString().padStart(2, '0');
             this.submitStatus = true;
           }
           else{
@@ -314,7 +315,8 @@ export class DateSelectorComponent implements OnInit {
         this.selectedMonth = month;
         this.selectedDay = day;
         this.fillDay();
-        this.val = year + '-' + month.toString().padStart(2, '0') + '-' + day.toString().padStart(2, '0');
+        this.val = year + '-' + (month < 10 ? '0' + month.toString() : month.toString()) + '-' + (day < 10 ? '0' + day.toString() : day.toString());
+        //this.val = year + '-' + month.toString().padStart(2, '0') + '-' + day.toString().padStart(2, '0');
         this.submitStatus = true;
       }
     }
