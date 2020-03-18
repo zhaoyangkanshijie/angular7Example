@@ -20,9 +20,9 @@ export class SimpleTextareaComponent implements OnInit {
   @Input()
   limit: number = 200;
   @Input()
-  require: boolean = false;
-  @Input()
   defaultHint : String = '';
+  @Input()
+  patternInfo = [];
 
   constructor() { }
 
@@ -38,11 +38,100 @@ export class SimpleTextareaComponent implements OnInit {
   }
 
   blurAction() {
-    if((this.val != "" || (!this.require && this.val == "")) && !this.showHint){
-      this.submitStatus = true;
+    // 循环匹配每项规则是否正确
+    if(this.patternInfo != null){
+      for(let i = 0;i < this.patternInfo.length;i++){
+        // 匹配到正则表达式，则显示错误
+        if(typeof this.patternInfo[i].pattern == 'object'){
+          if(!this.patternInfo[i].pattern.test(this.val)){
+            this.showHint = true;
+            this.hint = this.patternInfo[i].info;
+            break;
+          }
+        }
+        // 匹配到字符串是否相等，决定显示错误
+        else if(typeof this.patternInfo[i].pattern == 'string'){
+          if(this.patternInfo[i].option){
+            //相等显示错误
+            if(this.patternInfo[i].option == '='){
+              if(this.val == this.patternInfo[i].pattern){
+                this.showHint = true;
+                this.hint = this.patternInfo[i].info;
+                break;
+              }
+            }
+            //不等显示错误
+            else{
+              if(this.val != this.patternInfo[i].pattern){
+                this.showHint = true;
+                this.hint = this.patternInfo[i].info;
+                break;
+              }
+            }
+          }
+          //默认不等显示错误
+          else{
+            if(this.val != this.patternInfo[i].pattern){
+              this.showHint = true;
+              this.hint = this.patternInfo[i].info;
+              break;
+            }
+          }
+        }
+        // 匹配到长度，决定显示错误
+        else if(typeof this.patternInfo[i].pattern == 'number'){
+          if(this.patternInfo[i].option){
+            //大于指定长度
+            if(this.patternInfo[i].option == '>'){
+              if(this.val.length > this.patternInfo[i].pattern){
+                this.showHint = true;
+                this.hint = this.patternInfo[i].info;
+                break;
+              }
+            }
+            //等于指定长度
+            else if(this.patternInfo[i].option == '='){
+              if(this.val.length == this.patternInfo[i].pattern){
+                this.showHint = true;
+                this.hint = this.patternInfo[i].info;
+                break;
+              }
+            }
+            //小于指定长度
+            else{
+              if(this.val.length < this.patternInfo[i].pattern){
+                this.showHint = true;
+                this.hint = this.patternInfo[i].info;
+                break;
+              }
+            }
+          }
+          //默认小于指定长度
+          else{
+            if(this.val.length < this.patternInfo[i].pattern){
+              this.showHint = true;
+              this.hint = this.patternInfo[i].info;
+              break;
+            }
+          }
+        }
+        // 匹配到是否显示错误
+        else if(typeof this.patternInfo[i].pattern == 'boolean'){
+          if(this.patternInfo[i].pattern){
+            this.showHint = true;
+            this.hint = this.patternInfo[i].info;
+            break;
+          }
+        }
+        // 其余均显示错误
+        else {
+          this.showHint = true;
+          this.hint = this.patternInfo[i].info;
+          break;
+        }
+      }
     }
-    else{
-      this.showHint = true;
+    if(this.showHint){
       this.submitStatus = false;
     }
   }
@@ -66,7 +155,8 @@ export class SimpleTextareaComponent implements OnInit {
   }
 
   getSubmitStatus() {
-    if(this.val != "" || (!this.require && this.val == "") && !this.showHint){
+    this.blurAction();
+    if(!this.showHint){
       this.submitStatus = true;
     }
     else{
