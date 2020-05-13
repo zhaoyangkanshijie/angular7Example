@@ -44,4 +44,27 @@
         line-height: 18px;
         margin-left: 12px;
     }
+
+    .list{
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 318px;
+        border: 1px solid #CCCCCC;
+        max-height: 200px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        .item{
+            background-color: #fff;
+            padding: 7px 12px;
+            line-height: 18px;
+            font-size: 12px;
+            cursor: pointer;
+
+            &:hover{
+                background-color: #0099FF;
+            }
+        }
+    }
 }

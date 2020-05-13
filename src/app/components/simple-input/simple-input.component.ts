@@ -11,6 +11,8 @@ export class SimpleInputComponent implements OnInit {
   private showHint : boolean = false;
   private val : String = '';
   private submitStatus : boolean = false;
+  public optionList = [];
+  public openList : boolean = false;
 
   @Input()
   defaultWord : String = '';
@@ -20,6 +22,8 @@ export class SimpleInputComponent implements OnInit {
   defaultHint : String = '';
   @Input()
   patternInfo = [];
+  @Input()
+  optionInfo = [];
 
   constructor() { }
 
@@ -161,6 +165,21 @@ export class SimpleInputComponent implements OnInit {
   setVal(value){
     this.val = value;
     this.submitStatus = true;
+  }
+
+  showList() {
+    this.optionList = this.optionInfo.filter((value,index,arr)=>{
+      return value.Name.indexOf(this.val) > -1;
+    });
+    this.openList = true;
+  }
+
+  setItem(e) {
+    if(e.target.nodeName === "P"){
+      this.val = e.target.innerHTML;
+      this.openList = false;
+    }
+    this.focusAction();
   }
 
 }

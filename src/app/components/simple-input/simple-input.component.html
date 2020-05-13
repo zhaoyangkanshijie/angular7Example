@@ -2,4 +2,7 @@
   <input class="in" [placeholder]="defaultWord" type="text" [ngModel]="val" (ngModelChange)="valtrim($event)" 
   [ngClass]="{'error':showHint}" (blur)="blurAction()" (focus)="focusAction()" />
   <p class="hint" *ngIf="showHint">{{hint}}</p>
+  <div class="list" *ngIf="optionList.length > 0 && openList" (click)="setItem($event)">
+    <p class="item" *ngFor="let key of optionList;let i = index;">{{optionList[i].Name}}</p>
+  </div>
 </div>
