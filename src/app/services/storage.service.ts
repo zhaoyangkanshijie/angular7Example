@@ -7,7 +7,7 @@ import { Subject, Subscription, Observable } from 'rxjs';
 export class StorageService {
   private subject = new Subject<any>();
   
-  sendMessage(message:string){
+  sendMessage(message){
     this.subject.next({message:message});
   }
 

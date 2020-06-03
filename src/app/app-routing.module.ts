@@ -15,27 +15,32 @@ import { DictionaryComponent } from './pages/dictionary/dictionary.component';
 import { TextareaComponent } from './pages/textarea/textarea.component';
 import { CrudComponent } from './pages/crud/crud.component';
 import { ServiceComponent } from './pages/service/service.component';
+import { AuthGuard } from './modules/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: IndexComponent,
-    data: { state: 'index' }
+    data: { state: 'index' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'index',
     component: IndexComponent,
-    data: { state: 'index' }
+    data: { state: 'index' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'myComponent',
     component: MyComponentComponent,
-    data: { state: 'myComponent' }
+    data: { state: 'myComponent' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'page',
     component: PageComponent,
-    data: { state: 'page' }
+    data: { state: 'page' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'other',
@@ -45,57 +50,68 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
-    data: { state: 'register' }
+    data: { state: 'register' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'stylePipe',
     component: StylePipeComponent,
-    data: { state: 'stylePipe' }
+    data: { state: 'stylePipe' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'filling',
     component: FillingComponent,
-    data: { state: 'filling' }
+    data: { state: 'filling' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'date',
     component: DateComponent,
-    data: { state: 'date' }
+    data: { state: 'date' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'selection',
     component: SelectionComponent,
-    data: { state: 'selection' }
+    data: { state: 'selection' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'radio',
     component: RadioComponent,
-    data: { state: 'radio' }
+    data: { state: 'radio' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'input',
     component: InputComponent,
-    data: { state: 'input' }
+    data: { state: 'input' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'dictionary',
     component: DictionaryComponent,
-    data: { state: 'dictionary' }
+    data: { state: 'dictionary' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'textarea',
     component: TextareaComponent,
-    data: { state: 'textarea' }
+    data: { state: 'textarea' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'crud',
     component: CrudComponent,
-    data: { state: 'crud' }
+    data: { state: 'crud' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'service',
     component: ServiceComponent,
-    data: { state: 'service' }
+    data: { state: 'service' },
+    canActivate: [AuthGuard]
   }
 ];
 

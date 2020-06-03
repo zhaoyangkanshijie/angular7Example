@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
   constructor( private cookieService: CookieService, private storage: StorageService ) { }
 
   ngOnInit() {
-    this.name = this.cookieService.get( 'tp-link' );
+    this.name = this.cookieService.get( 'zhaoyangkanshijie' );
   }
 
   ngAfterViewInit() {
