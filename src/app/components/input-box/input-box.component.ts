@@ -7,21 +7,21 @@ import { Component, OnInit, Input, Output, SimpleChanges, EventEmitter } from '@
 })
 export class InputBoxComponent implements OnInit {
 
-  private canSeeSubtitle : String = 'not-visible';
-  private inputClass : String = '';
-  private changeType : String = 'text';
-  private val : String = '';
-  private canSubmit : boolean = false;
-  private info : String = '';
+  public canSeeSubtitle : string = 'not-visible';
+  public inputClass : string = '';
+  public changeType : string = 'text';
+  public val : string = '';
+  public canSubmit : boolean = false;
+  public info : string = '';
 
   @Input()
-  subtitle : String = '';
+  subtitle : string = '';
   @Input()
-  inputType : String = '';
+  inputType : string = '';
   @Input()
-  inputName: String = '';
+  inputName: string = '';
   @Input()
-  inputValue: String = '';
+  inputValue: string = '';
   @Input()
   disable: Boolean = false;
   @Input()
@@ -29,29 +29,29 @@ export class InputBoxComponent implements OnInit {
   @Input()
   len: Number;
   @Input()
-  patternReg: String = '';
+  patternReg: string = '';
   @Input()
-  validTitle: String = '';
+  validTitle: string = '';
   @Input()
-  required: String = '';
+  required: string = '';
   @Input()
   patternInfo = [];
   // @Input()
-  // set _val(_val: String) {
+  // set _val(_val: string) {
   //   this.val = _val.trim();
   // }
-  // get _val(): String {
+  // get _val(): string {
   //   return this.val.trim();
   // }
 
   @Output()
-  beforeFocus = new EventEmitter<String>();
+  beforeFocus = new EventEmitter<string>();
   @Output()
-  focused = new EventEmitter<String>();
+  focused = new EventEmitter<string>();
   @Output()
-  beforeBlur = new EventEmitter<String>();
+  beforeBlur = new EventEmitter<string>();
   @Output()
-  blured = new EventEmitter<String>();
+  blured = new EventEmitter<string>();
 
   constructor() { }
 
@@ -64,11 +64,11 @@ export class InputBoxComponent implements OnInit {
     //console.log(changes)
   }
 
-  valtrim(e){
+  valtrim(e: string): void {
     this.val = e.trim();
   }
 
-  focusAction(){
+  focusAction(): void {
     this.beforeFocus.emit("beforeFocus");
     if(!this.readOnly){
       this.inputClass = 'focus';
@@ -78,7 +78,7 @@ export class InputBoxComponent implements OnInit {
     this.focused.emit("focused");
   }
 
-  blurAction(){
+  blurAction(): void {
     this.beforeBlur.emit("beforeBlur");
     this.inputClass = '';
       if(this.val == ''){
@@ -99,7 +99,7 @@ export class InputBoxComponent implements OnInit {
     this.blured.emit("blured");
   }
 
-  validation() {
+  validation(): void {
     // 循环匹配每项规则是否正确
     if(this.patternInfo != null){
       for(let i = 0;i < this.patternInfo.length;i++){
@@ -195,15 +195,15 @@ export class InputBoxComponent implements OnInit {
     }
   }
 
-  getVal() {
+  getVal(): string {
     return this.val.trim();
   }
 
-  getSubmitStatus() {
+  getSubmitStatus(): boolean {
     return this.canSubmit;
   }
 
-  showServerInfo(serverInfo) {
+  showServerInfo(serverInfo: string): void {
     if(serverInfo != ''){
       this.inputClass = 'error';
       this.info = serverInfo;

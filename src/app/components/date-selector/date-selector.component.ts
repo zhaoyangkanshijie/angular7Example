@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'date-selector',
@@ -7,25 +7,25 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DateSelectorComponent implements OnInit {
 
-  private hint : String = '';
-  private showHint : boolean = false;
-  private val : String = '';
-  private year = [];
-  private month = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
-  private week = ["日","一","二","三","四","五","六"];
-  private day = new Array(42);
-  private selectedYear : number = -1;
-  private selectedMonth : number = -1;
-  private selectedDay : number = -1;
-  private yearOpen : boolean = false;
-  private monthOpen : boolean = false;
-  private dayOpen : boolean = false;
-  private yearOffsetTop : string = '0px';
-  private monthOffsetTop : string = '0px';
-  private disabled : boolean = false;
-  private submitStatus : boolean = false;
-  private timer = null;
-  private timeout : number = 0;
+  public hint : string = '';
+  public showHint : boolean = false;
+  public val : string = '';
+  public year = [];
+  public month = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
+  public week = ["日","一","二","三","四","五","六"];
+  public day = new Array(42);
+  public selectedYear : number = -1;
+  public selectedMonth : number = -1;
+  public selectedDay : number = -1;
+  public yearOpen : boolean = false;
+  public monthOpen : boolean = false;
+  public dayOpen : boolean = false;
+  public yearOffsetTop : string = '0px';
+  public monthOffsetTop : string = '0px';
+  public disabled : boolean = false;
+  public submitStatus : boolean = false;
+  public timer = null;
+  public timeout : number = 0;
 
   @Input()
   toNow : boolean = false;
@@ -34,13 +34,16 @@ export class DateSelectorComponent implements OnInit {
   @Input()
   endYear : number;
   @Input()
-  defaultCheckboxValue : String = '';
+  defaultCheckboxValue : string = '';
   @Input()
-  defaultValue: String = '';
+  defaultValue: string = '';
   @Input()
-  defaultHint : String = '';
+  defaultHint : string = '';
   @Input()
   hoverTime : number = 0;
+
+  @Output()
+  selected = new EventEmitter<string>();
 
   constructor() { }
 
@@ -51,7 +54,7 @@ export class DateSelectorComponent implements OnInit {
     this.fillYear();
   }
 
-  boxClick(){
+  boxClick(): void {
     if(this.disabled){
       this.yearOpen=false;
     }
@@ -63,15 +66,17 @@ export class DateSelectorComponent implements OnInit {
     this.showHint=false;
   }
 
-  checkClick(){
-    this.disabled=!this.disabled;
+  checkClick(): void {
+    this.disabled = !this.disabled;
     if(this.disabled){
       this.val = this.defaultCheckboxValue.trim();
       this.submitStatus = true;
+      this.selected.emit("selected");
     }
     else if(this.selectedDay > 0){
       this.val = this.selectedYear+'-'+(this.selectedMonth<10?'0'+this.selectedMonth:this.selectedMonth)+'-'+(this.selectedDay<10?'0'+this.selectedDay:this.selectedDay);
       this.submitStatus = true;
+      this.selected.emit("selected");
     }
     else{
       this.val = this.defaultValue.trim();
@@ -83,7 +88,7 @@ export class DateSelectorComponent implements OnInit {
     this.showHint=false;
   }
 
-  mouseEnterProxy(time,item,e) {
+  mouseEnterProxy(time,item,e): void {
     if(this.timer){
       this.clearTimer();
     }
@@ -97,20 +102,20 @@ export class DateSelectorComponent implements OnInit {
     }
   }
 
-  clearTimer() {
+  clearTimer(): void {
     clearTimeout(this.timer);
     this.timer = null;
   }
 
-  yearEnter(){
+  yearEnter(): void {
     this.dayOpen=false;
   }
 
-  yearClass(yearItem){
+  yearClass(yearItem): boolean {
     return this.selectedYear == yearItem;
   }
 
-  yearClick(yearItem,e){
+  yearClick(yearItem,e): void {
     if(this.selectedYear != yearItem){
       this.selectedYear = yearItem;
       this.selectedMonth = -1;
@@ -120,15 +125,15 @@ export class DateSelectorComponent implements OnInit {
     this.monthOpen = true;
   }
 
-  monthEnter(){
+  monthEnter(): void {
     
   }
 
-  monthClass(monthItem){
+  monthClass(monthItem): boolean{
     return this.selectedMonth == parseInt(monthItem);
   }
 
-  monthClick(monthItem,e){
+  monthClick(monthItem,e): void {
     if(this.selectedMonth != parseInt(monthItem)){
       this.selectedMonth = parseInt(monthItem);
       this.fillDay();
@@ -137,11 +142,11 @@ export class DateSelectorComponent implements OnInit {
     this.dayOpen = true;
   }
 
-  dayClass(dayItem){
+  dayClass(dayItem): boolean {
     return dayItem.canSelect && dayItem.dayNumber == this.selectedDay;
   }
 
-  dayClick(dayItem){
+  dayClick(dayItem): void{
     if(this.selectedDay != dayItem.dayNumber && dayItem.canSelect){
       this.selectedDay = dayItem.dayNumber;
       this.val = dayItem.date;
@@ -149,16 +154,17 @@ export class DateSelectorComponent implements OnInit {
       this.monthOpen=false;
       this.dayOpen=false;
       this.submitStatus = true;
+      this.selected.emit("selected");
     }
   }
 
-  fillYear(){
+  fillYear(): void {
     for(let i = this.startYear;i <= this.endYear;i++){
       this.year.push(i);
     }
   }
 
-  fillDay(){
+  fillDay(): void {
     let nowDate;
     //兼容ie
     if(this.selectedMonth < 10){
@@ -202,25 +208,25 @@ export class DateSelectorComponent implements OnInit {
     }
   }
 
-  setYear(year){
+  setYear(year: number): void {
     this.selectedYear = year;
   }
 
-  setMonth(month){
+  setMonth(month: number): void {
     this.selectedMonth = month;
   }
 
-  setDay(day){
+  setDay(day: number): void {
     this.selectedDay = day;
   }
 
-  // 根据给定日期算出星期
-  getDay(date){
+  // 根据给定日期算出星期几
+  getDay(date: number): number {
     return new Date(date).getDay();
   }
 
   // 获取某月的天数
-  getMonthNumber(){
+  getMonthNumber(): number {
     let d = new Date(this.selectedYear,this.selectedMonth,0);
     let num = d.getDate();
     return num;
@@ -229,43 +235,47 @@ export class DateSelectorComponent implements OnInit {
   // 获取某一天的昨天和明天
   // date 代表指定的日期，格式：2018-09-27
   // day 传-1表始前一天，传1表始后一天
-  getNextDate(date,day) {  
-    var dd = new Date(date);
+  getNextDate(date: number, day: number): string {  
+    let dd = new Date(date);
     dd.setDate(dd.getDate() + day);
-    var y = dd.getFullYear();
-    var m = dd.getMonth() + 1 < 10 ? "0" + (dd.getMonth() + 1) : dd.getMonth() + 1;
-    var d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();
+    let y = dd.getFullYear();
+    let m = dd.getMonth() + 1 < 10 ? "0" + (dd.getMonth() + 1) : dd.getMonth() + 1;
+    let d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();
     return y + "-" + m + "-" + d;
   }
 
   // 获取日历中某一天的昨天和明天的数字
-  getNextDayNumber(date,day){
-    var dd = new Date(date);
+  getNextDayNumber(date: number, day: number): number {
+    let dd = new Date(date);
     dd.setDate(dd.getDate() + day);
-    var d = dd.getDate();
+    let d = dd.getDate();
     return d;
   }
 
-  getVal() {
+  getVal(): string {
     //this.val = this.selectedYear+'年'+this.selectedMonth+'月'+this.selectedDay+'日';
     //return this.selectedYear+'年'+this.selectedMonth+'月'+this.selectedDay+'日';
     return this.val.trim();
   }
 
-  getHint() {
+  getHint(): string {
     return this.hint;
   }
 
-  getSubmitStatus() {
+  getSubmitStatus(): boolean {
     return this.submitStatus;
   }
 
-  showServerInfo(serverInfo) {
+  showServerInfo(serverInfo: string): void {
     this.showHint = true;
     this.hint = serverInfo;
   }
 
-  setVal(value){
+  clearServerInfo(): void {
+    this.showHint = false;
+  }
+
+  setVal(value: string): void {
     if(value == "至今"){
       this.val = value;
       this.disabled = true;

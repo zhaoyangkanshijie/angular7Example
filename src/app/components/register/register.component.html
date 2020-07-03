@@ -4,27 +4,40 @@
     <div class="container">
       <h3 class="title">注册</h3>
       <input-box class="input-box" subtitle="手机号" inputType="text" inputName="phone" 
-      required="手机号不能为空" [patternInfo]=phonePatternInfo #phone></input-box>
+      required="手机号不能为空" [patternInfo]="phonePatternInfo" (focused)="forgetPassword=false;moreHelp=false" (blured)="checkPhone()" #phone></input-box>
+      <p class="forget" *ngIf="forgetPassword" (click)="findPassword()">找回密码</p>
+      <p class="help" *ngIf="moreHelp" (click)="showMoreHelpModal=true">更多帮助</p>
       <input-box class="input-box" subtitle="密码" inputType="password" inputName="password" 
-      required="密码不能为空" [patternInfo]=passwordPatternInfo #password></input-box>
+      required="密码不能为空" [patternInfo]="passwordPatternInfo" #password></input-box>
       <input-box class="input-box" subtitle="确认密码" inputType="password" inputName="password2" 
-      required="确认密码不能为空" [patternInfo]=password2PatternInfo (beforeBlur)="syncPassword($event)" #password2></input-box>
+      required="确认密码不能为空" [patternInfo]="password2PatternInfo" (beforeBlur)="syncPassword($event)" #password2></input-box>
       <input-box class="input-box" subtitle="验证码" inputType="text" inputName="code" 
-      required="验证码不能为空" [patternInfo]=codePatternInfo #code>
-        <img class="code" src="../../../assets/close_normal.png" alt="code" />
+      required="验证码不能为空" [patternInfo]="codePatternInfo" #code>
+        <img class="code" [src]="codeSrc" alt="code" (click)="getCaptcha()" />
       </input-box>
       <input-box class="input-box" subtitle="短信验证码" inputType="text" inputName="message" 
       required="短信验证码不能为空" #message>
-        <p class="message" [ngClass]="{'disabled': messageDisabled}" (click)="sendMessage()">{{messageWord}}</p>
+        <p class="message" *ngIf="messageTimer == 0 && !messageDisabled" (click)="sendMessage()">发送验证码</p>
+        <p class="message disabled" *ngIf="messageTimer == 0 && messageDisabled">发送验证码</p>
+        <p class="message disabled" *ngIf="messageTimer != 0">验证码已发送({{messageTimer}}s)</p>
       </input-box>
       <p class="reg" (click)="registerSubmitData()">注册</p>
       <div class="other">
         <div class="agreement">
           <div class="agree" [ngClass]="{'checked': agree}" (click)="agree = !agree;agreeError = false;"></div>
-          <a class="word" [ngClass]="{'error': agreeError}" href="#">同意zhaoyangkanshijie用户注册协议</a>
+          <a class="word" [ngClass]="{'error': agreeError}" [routerLink]="['/agreement']" target="_blank">同意TP-LINK用户注册协议</a>
         </div>
-        <p class="login">立即登录</p>
+        <p class="login" (click)="jumpToLogin()">立即登录</p>
       </div>
     </div>
+  </div>
+</div>
+<div class="moreHelpModal" *ngIf="showMoreHelpModal">
+  <div class="board">
+    <p class="title">我的手机号为什么已注册？</p>
+    <img class="close" src="../../../assets/close_normal.png" alt="close" (click)="showMoreHelpModal=false" />
+    <p class="line1">1.可能你曾经使用该手机号注册过TP-LINK校园招聘账号。如果你忘记密码，请<span class="forget2" (click)="findPassword()">找回密码</span>。</p>
+    <p class="line2">2.可能你曾经使用该手机号注册过TP-LINK社会招聘账号。TP-LINK校园招聘和社会招聘可使用同一账号登录，请直接<span class="login2" (click)="jumpToLogin()">登录</span>。</p>
+    <p class="ok" (click)="showMoreHelpModal=false">确定</p>
   </div>
 </div>

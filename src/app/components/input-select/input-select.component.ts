@@ -7,20 +7,20 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class InputSelectComponent implements OnInit {
 
-  private hint : String = '';
-  private showHint : boolean = false;
-  private val : String = '';
-  private optionOpen : boolean = false;
-  private option = [];
-  private currentOption : number = -1;
-  private submitStatus : boolean = false;
+  public hint : string = '';
+  public showHint : boolean = false;
+  public val : string = '';
+  public optionOpen : boolean = false;
+  public option = [];
+  public currentOption : number = -1;
+  public submitStatus : boolean = false;
 
   @Input()
-  defaultWord : String = '';
+  defaultWord : string = '';
   @Input()
-  defaultValue: String = '';
+  defaultValue: string = '';
   @Input()
-  defaultHint : String = '';
+  defaultHint : string = '';
   @Input()
   InitOption = [];
 
@@ -32,12 +32,12 @@ export class InputSelectComponent implements OnInit {
     this.option = this.InitOption;
   }
 
-  boxClick(){
+  boxClick(): void {
     this.optionOpen=!this.optionOpen;
     this.showHint=false;
   }
 
-  valtrim(e){
+  valtrim(e): void{
     this.val = e.trim();
     if(this.val != ""){
       this.submitStatus = true;
@@ -47,11 +47,11 @@ export class InputSelectComponent implements OnInit {
     }
   }
 
-  getVal() {
+  getVal(): string {
     return this.val.trim();
   }
 
-  selectItem(index){
+  selectItem(index: number): void {
     for(let i = 0;i < this.option.length;i++){
       if(i == index){
         this.option[i].status = true;
@@ -65,11 +65,11 @@ export class InputSelectComponent implements OnInit {
     this.optionOpen = false;
   }
   
-  getSubmitStatus() {
+  getSubmitStatus(): boolean {
     return this.submitStatus;
   }
 
-  showServerInfo(serverInfo) {
+  showServerInfo(serverInfo: string): void {
     this.showHint = true;
     this.hint = serverInfo;
   }

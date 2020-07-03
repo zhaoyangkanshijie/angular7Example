@@ -1,21 +1,72 @@
-<div class="header">
+<div class="header" [ngClass]="{'indexStyle':indexStyle}">
   <a [routerLink]="['/']">
   <div class="title">
-    <p class="logo">zhaoyangkanshijie</p>
+    <img *ngIf="indexStyle === false" class="logo" src="../../../assets/logo.png" />
+    <img *ngIf="indexStyle === true" class="logo" src="../../../assets/logo_purple.png" />
     <p class="line">|</p>
-    <p class="word">zhaoyangkanshijie</p>
+    <p class="word">2021届校园招聘</p>
   </div>
   </a>
   <div class="nav">
     <div class="content">
       <a class="item" [routerLink]="['/']">首页</a>
-      <a class="item" [routerLink]="['/myComponent']">组件</a>
-      <a class="item" [routerLink]="['/page']">页面</a>
-      <a class="item" [routerLink]="['/other']">其他功能</a>
+      <a class="item" [routerLink]="['/jobList']">职位查询</a>
+      <a class="item" [routerLink]="['/travelling']">应聘须知</a>
+      <a class="item" [routerLink]="['/benifit']">走进TP-LINK</a>
     </div>
   </div>
   <div class="info">
-    <a class="github" href="https://github.com/zhaoyangkanshijie">zhaoyangkanshijie github</a>
+    <div class="loged" (clickOutside)="showMenu=false;showMenuLoged=false;" (mouseenter)="toggleMenu()" (mouseleave)="toggleMenu()">
+      <span class="hello">你好，
+        <a class="name" [routerLink]="['/userhome']" *ngIf="loged">{{account}}</a>
+        <a class="name" *ngIf="!loged">{{account}}</a>
+      </span>
+      <img class="folder" *ngIf="indexStyle === false" src="../../../assets/dropdown_normal_white.png" (click)="toggleMenu()" />
+      <img class="folder" *ngIf="indexStyle === true" src="../../../assets/dropdown_normal_purple.png" (click)="toggleMenu()" />
+      <div class="menu" *ngIf="!loged&&showMenu">
+        <p class="login" (click)="login.canSeeloginModal = true">登录</p>
+        <p class="register" (click)="register.canSeeRegisterModal = true">注册</p>
+      </div>
+      <div class="menu" *ngIf="loged&&showMenuLoged">
+        <a class="login" [routerLink]="['/userhome']">个人中心</a>
+        <p class="register" (click)="logoutConfirm()">退出登录</p>
+      </div>
+    </div>
+    <a class="tplink" href="https://www.tp-link.com.cn/">TP-LINK官网</a>
+    <!-- <div class="loged" *ngIf="name!='';else logon">
+      <p (click)="changeState()">你好，{{name}}</p>
+      <div [@menu]="boxState" class="menu">
+        <p>123123</p>
+        <p>123123</p>
+        <p>123123</p>
+      </div>
+    </div>
+    <ng-template #logon>
+      <div class="logon">
+        如果上面那段话不显示，则表示执行else逻辑，显示这一段话。
+      </div>
+    </ng-template>
+    <div class="web">
+      <p class="word">tp-link官网</p>
+    </div> -->
   </div>
 </div>
 
+<login (changeModal)="jump($event)" (changeAccount)="changeAccount()" #login></login>
+<register (changeModal)="jump($event)" (changeAccount)="changeAccount()" #register></register>
+<find-password (changeModal)="jump($event)" #findPassword></find-password>
+
+<div class="logoutConfirmModal" *ngIf="showLogoutConfirmModal">
+  <div class="board">
+    <img class="close" src="../../../assets/close_normal.png" alt="close" (click)="showLogoutConfirmModal=false" />
+    <div class="title">
+      <img class="icon" src="../../../assets/Whether.png" alt="1." />
+      <p class="word">提示</p>
+    </div>
+    <p class="content">确定退出登录吗？</p>
+    <div class="action">
+        <p class="logout" (click)="logout()">退出登录</p>
+        <p class="cancel" (click)="showLogoutConfirmModal=false">取消</p>
+      </div>
+  </div>
+</div>

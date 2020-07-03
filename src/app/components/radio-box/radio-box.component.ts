@@ -7,16 +7,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class RadioBoxComponent implements OnInit {
 
-  private option = [];
-  private hint : String = "";
-  private showHint : boolean = false;
-  private currentOption : number = -1;
-  private submitStatus : boolean = false;
+  public option = [];
+  public hint : string = "";
+  public showHint : boolean = false;
+  public currentOption : number = -1;
+  public submitStatus : boolean = false;
 
   @Input()
   defaultIndex: number = -1;
   @Input()
-  defaultHint : String = '';
+  defaultHint : string = '';
   @Input()
   InitOption = [];
 
@@ -28,15 +28,15 @@ export class RadioBoxComponent implements OnInit {
     this.option =  this.InitOption;
   }
 
-  getVal() {
+  getVal(): string {
     return this.option[this.currentOption].detail;
   }
 
-  getHint() {
+  getHint(): string {
     return this.hint;
   }
 
-  selectItem(index){
+  selectItem(index: number): void{
     for(let i = 0;i < this.option.length;i++){
       if(i == index){
         this.option[i].status = true;
@@ -50,16 +50,16 @@ export class RadioBoxComponent implements OnInit {
     this.showHint = false;
   }
   
-  getSubmitStatus() {
+  getSubmitStatus(): boolean {
     return this.submitStatus;
   }
 
-  showServerInfo(serverInfo) {
+  showServerInfo(serverInfo: string): void {
     this.showHint = true;
     this.hint = serverInfo;
   }
 
-  setVal(value){
+  setVal(value: string): void{
     let index = -1;
     for(let i = 0;i < this.option.length;i++){
       if(value == this.option[i].detail){

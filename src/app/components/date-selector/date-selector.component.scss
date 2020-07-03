@@ -19,7 +19,7 @@
 
     .box.open{
         background: #FFFFFF url('../../../assets/dropdown_grey_hover.png') top 7px right 10px no-repeat;
-        border: 1px solid #0096FF;
+        border: 1px solid #0099FF;
     }
 
     .box.error{
@@ -104,12 +104,12 @@
             }
 
             .yearItem:hover{
-                background-color: #0096FF;
+                background-color: #0099FF;
                 color: #ffffff;
             }
 
             .yearItem.selected{
-                background-color: #0096FF;
+                background-color: #0099FF;
                 color: #ffffff;
             }
         }
@@ -147,12 +147,12 @@
             }
 
             .monthItem:hover{
-                background-color: #0096FF;
+                background-color: #0099FF;
                 color: #ffffff;
             }
 
             .monthItem.selected{
-                background-color: #0096FF;
+                background-color: #0099FF;
                 color: #ffffff;
             }
         }
@@ -203,12 +203,12 @@
                 }
 
                 .dayItem.ok:hover{
-                    background-color: #0096FF;
+                    background-color: #0099FF;
                     color: #ffffff;
                 }
 
                 .dayItem.ok.selected{
-                    background-color: #0096FF;
+                    background-color: #0099FF;
                     color: #ffffff;
                 }
 

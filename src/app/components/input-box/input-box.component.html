@@ -1,9 +1,9 @@
 <div class="inputBox">
   <div class="content">
     <p class="text" [ngClass]="canSeeSubtitle">{{subtitle}}</p>
-    <input class="in" [ngClass]="inputClass" [type]=inputType [placeholder]=subtitle
-    [name]=inputName [maxlength]=len [pattern]=patternReg [title]=validTitle
-    [required]=required [ngModel]="val" (ngModelChange)="valtrim($event)" 
+    <input class="in" [ngClass]="inputClass" [type]="inputType" [placeholder]="subtitle"
+    [name]="inputName" [maxlength]="len" [pattern]="patternReg" [title]="validTitle"
+    [required]="required" [ngModel]="val" (ngModelChange)="valtrim($event)" 
     (focus)="focusAction()" (blur)="blurAction()" 
     [disabled]=disable [readonly]=readOnly />
     <ng-content select=".code"></ng-content>

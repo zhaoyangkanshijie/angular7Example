@@ -7,20 +7,20 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SimpleTextareaComponent implements OnInit {
 
-  private hint : String = '';
-  private showHint : boolean = false;
-  private val : String = '';
-  private len : number = 0;
-  private submitStatus : boolean = false;
+  public hint : string = '';
+  public showHint : boolean = false;
+  public val : string = '';
+  public len : number = 0;
+  public submitStatus : boolean = false;
 
   @Input()
-  inputValue: String = '';
+  inputValue: string = '';
   @Input()
-  placeholder: String = '';
+  placeholder: string = '';
   @Input()
   limit: number = 200;
   @Input()
-  defaultHint : String = '';
+  defaultHint : string = '';
   @Input()
   patternInfo = [];
 
@@ -32,12 +32,12 @@ export class SimpleTextareaComponent implements OnInit {
     this.len = this.val.length;
   }
 
-  focusAction() {
+  focusAction(): void {
     this.showHint = false;
     this.len = this.val.length;
   }
 
-  blurAction() {
+  blurAction(): void{
     // 循环匹配每项规则是否正确
     if(this.patternInfo != null){
       for(let i = 0;i < this.patternInfo.length;i++){
@@ -136,25 +136,25 @@ export class SimpleTextareaComponent implements OnInit {
     }
   }
 
-  valsubstr(e) {
+  valsubstr(e: string): void {
     this.val = e.substring(0, this.limit);
     this.len = this.val.length;
   }
 
-  getVal() {
+  getVal(): string {
     return this.val.substring(0, this.limit);
   }
 
-  setVal(value){
+  setVal(value: string): void {
     this.val = value;
     this.submitStatus = true;
   }
 
-  getHint() {
+  getHint(): string {
     return this.hint;
   }
 
-  getSubmitStatus() {
+  getSubmitStatus(): boolean {
     this.blurAction();
     if(!this.showHint){
       this.submitStatus = true;
@@ -165,7 +165,7 @@ export class SimpleTextareaComponent implements OnInit {
     return this.submitStatus;
   }
 
-  showServerInfo(serverInfo) {
+  showServerInfo(serverInfo): void {
     this.showHint = true;
     this.hint = serverInfo;
   }

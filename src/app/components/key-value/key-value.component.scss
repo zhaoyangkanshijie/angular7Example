@@ -23,7 +23,7 @@
         box-sizing: border-box;
         padding: 8px 10px;
         color: #333333;
-        caret-color: #0096FF;
+        caret-color: #0099FF;
     }
 
     .input.error{
@@ -31,7 +31,7 @@
     }
 
     .input:focus{
-        border: 1px solid #0096FF;
+        border: 1px solid #0099FF;
     }
 
     .input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
@@ -69,7 +69,7 @@
     
         .box.open{
             background: #FFFFFF url('../../../assets/dropdown_grey_hover.png') top 7px right 10px no-repeat;
-            border: 1px solid #0096FF;
+            border: 1px solid #0099FF;
         }
     
         .box.error{

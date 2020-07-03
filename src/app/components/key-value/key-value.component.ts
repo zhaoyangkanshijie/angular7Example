@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChange } from '@angular/core';
 import _ from 'lodash';
 
 @Component({
@@ -8,39 +8,39 @@ import _ from 'lodash';
 })
 export class KeyValueComponent implements OnInit {
 
-  private keyInput : any = {
+  public keyInput : any = {
     value: '',
     placeholder: '',
     patternInfo: []
   };
-  private keySelect : any = {
+  public keySelect : any = {
     word: '',
     optionOpen: false,
     currentOption: -1,
     option: []
   };
-  private valueInput : any = {
+  public valueInput : any = {
     value: '',
     placeholder: '',
     patternInfo: []
   };
-  private valueSelect : any = {
+  public valueSelect : any = {
     word: '',
     optionOpen: false,
     currentOption: -1,
     option: []
   };
-  private isKeyRequired : Boolean = false;
-  private isValueRequired : Boolean = false;
-  private hint : String = '';
-  private showHint : boolean = false;
-  private val : String = '';
-  private submitStatus : boolean = false;
+  public isKeyRequired : Boolean = false;
+  public isValueRequired : Boolean = false;
+  public hint : string = '';
+  public showHint : boolean = false;
+  public val : string = '';
+  public submitStatus : boolean = false;
 
   @Input()
-  keyType : String = 'input';
+  keyType : string = 'input';
   @Input()
-  valueType : String = 'input';
+  valueType : string = 'input';
   @Input()
   keyObject : any = {};
   @Input()
@@ -50,7 +50,7 @@ export class KeyValueComponent implements OnInit {
   @Input()
   defaultValueRequired : Boolean = false;
   @Input()
-  defaultHint : String = '';
+  defaultHint : string = '';
 
   constructor() { }
 
@@ -59,13 +59,12 @@ export class KeyValueComponent implements OnInit {
     this.hint = this.defaultHint;
   }
 
-  ngOnChanges(){
-    //整个@input对象改变才能触发，只改变对象属性值不能触发
+  ngOnChanges(changes: SimpleChange){
     this.initFillData();
     this.hint = this.defaultHint;
   }
 
-  initFillData() {
+  initFillData(): void {
     if(this.keyType == 'input'){
       //this.keyInput = JSON.parse(JSON.stringify(this.keyObject));
       this.keyInput = _.cloneDeep(this.keyObject);
@@ -86,11 +85,11 @@ export class KeyValueComponent implements OnInit {
     this.isValueRequired = this.defaultValueRequired;
   }
 
-  focusAction(){
+  focusAction(): void {
     this.showHint = false;
   }
 
-  blurAction(isKey){
+  blurAction(isKey: boolean): void {
     let patternInfo = [];
     let value = '';
     if(isKey){
@@ -199,7 +198,7 @@ export class KeyValueComponent implements OnInit {
     }
   }
 
-  boxClick(isKey){
+  boxClick(isKey: boolean): void {
     if(isKey){
       this.keySelect.optionOpen = !this.keySelect.optionOpen;
     }
@@ -209,15 +208,15 @@ export class KeyValueComponent implements OnInit {
     this.showHint = false;
   }
 
-  trimKey(e){
+  trimKey(e): void {
     this.keyInput.value = e.trim();
   }
 
-  trimValue(e){
+  trimValue(e): void {
     this.valueInput.value = e.trim();
   }
 
-  getVal() {
+  getVal(): string {
     let val1 = '';
     let val2 = '';
     if(this.keyType == 'input'){
@@ -240,11 +239,11 @@ export class KeyValueComponent implements OnInit {
       return '';
     }
     else{
-      return '(' + val1 + ')' + val2;
+      return val1 + ' ' + val2;
     }
   }
 
-  getKeyVal() {
+  getKeyVal(): string {
     let val1 = '';
     if(this.keyType == 'input'){
       val1 = this.keyInput.value.trim();
@@ -262,7 +261,7 @@ export class KeyValueComponent implements OnInit {
     }
   }
 
-  getValueVal() {
+  getValueVal(): string {
     let val2 = '';
     if(this.valueType == 'input'){
       val2 = this.valueInput.value.trim();
@@ -280,7 +279,7 @@ export class KeyValueComponent implements OnInit {
     }
   }
 
-  setVal(value){
+  setVal(value: string): void {
     if(value == ''){
       if(this.keyType == 'input'){
         this.keyInput.value = '';
@@ -300,7 +299,7 @@ export class KeyValueComponent implements OnInit {
     }
     else{
       let valueSum = value;
-      let valueArr = valueSum.replace('(','').split(')');
+      let valueArr = valueSum.split(' ');
       let value1 = valueArr[0];
       let value2 = valueArr[1];
       
@@ -348,11 +347,11 @@ export class KeyValueComponent implements OnInit {
     }
   }
 
-  getHint() {
+  getHint(): string {
     return this.hint;
   }
 
-  selectItem(index,isKey){
+  selectItem(index: number ,isKey: boolean): void{
     if(isKey){
       for(let i = 0;i < this.keySelect.option.length;i++){
         if(i == index){
@@ -381,7 +380,7 @@ export class KeyValueComponent implements OnInit {
     }
   }
   
-  getSubmitStatus() {
+  getSubmitStatus(): boolean {
     if(this.showHint){
       return false;
     }
@@ -405,7 +404,7 @@ export class KeyValueComponent implements OnInit {
     }
   }
 
-  showServerInfo(serverInfo) {
+  showServerInfo(serverInfo: string): void {
     this.showHint = true;
     this.hint = serverInfo;
   }

@@ -10,7 +10,7 @@
             <p class="yearItem" *ngFor="let yearItem of year;let i = index;" [ngClass]="{'selected':yearClass(yearItem)}" (click)="yearClick(yearItem,$event)" (mouseenter)="mouseEnterProxy('year',yearItem,$event)" (mouseleave)="clearTimer()">{{yearItem}}</p>
         </div>
         <div class="month" *ngIf="monthOpen" (mouseenter)="monthEnter()" [ngStyle]="{'top':yearOffsetTop}">
-            <p class="monthItem" *ngFor="let monthItem of month;let j = index;" [ngClass]="{'selected':monthClass(monthItem)}" (click)="monthClick(monthItem,$event)" (mouseenter)="mouseEnterProxy('month',yearItem,$event)" (mouseleave)="clearTimer()">{{monthItem}}</p>
+            <p class="monthItem" *ngFor="let monthItem of month;let j = index;" [ngClass]="{'selected':monthClass(monthItem)}" (click)="monthClick(monthItem,$event)" (mouseenter)="mouseEnterProxy('month',monthItem,$event)" (mouseleave)="clearTimer()">{{monthItem}}</p>
         </div>
         <div class="calendar" *ngIf="dayOpen" [ngStyle]="{'top':monthOffsetTop}">
             <div class="week">

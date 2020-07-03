@@ -1,5 +1,6 @@
 .simpleInput{
     height: 32px;
+    position: relative;
 
     .in{
         float: left;
@@ -11,11 +12,11 @@
         padding: 7px 10px;
         box-sizing: border-box;
         color: #333333;
-        caret-color: #0096FF;
+        caret-color: #0099FF;
     }
 
     .in:focus{
-        border: 1px solid #0096FF;
+        border: 1px solid #0099FF;
     }
 
     .in::-webkit-input-placeholder { /* WebKit, Blink, Edge */

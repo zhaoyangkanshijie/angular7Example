@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter,SimpleChange } from '@angular/core';
 
 @Component({
   selector: 'select-box',
@@ -7,34 +7,45 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SelectBoxComponent implements OnInit {
 
-  private word : String = '';
-  private hint : String = '';
-  private showHint : boolean = false;
-  private optionOpen : boolean = false;
-  private disabled : boolean = false;
-  private option = [];
-  private currentOption : number = -1;
-  private submitStatus : boolean = false;
+  public word : string = '';
+  public hint : string = '';
+  public showHint : boolean = false;
+  public optionOpen : boolean = false;
+  public disabled : boolean = false;
+  public option = [];
+  public currentOption : number = -1;
+  public submitStatus : boolean = false;
 
   @Input()
   time : boolean = false;
   @Input()
-  defaultWord : String = '';
+  defaultWord : string = '';
   @Input()
-  defaultCheckboxValue : String = '';
+  defaultCheckboxValue : string = '';
   @Input()
-  defaultHint : String = '';
+  defaultHint : string = '';
   @Input()
   InitOption = [];
   @Input()
   defaultIndex : number = -1;
 
+  @Output()
+  selected = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnInit() {
+    this.initial();
+  }
+
+  initial() {
     this.word = this.defaultWord;
     this.hint = this.defaultHint;
     this.option = this.InitOption;
+    this.currentOption = -1;
+    this.submitStatus = false;
+    this.showHint = false;
+    this.selectItem(-1);
     if(this.defaultIndex != -1){
       this.currentOption = this.defaultIndex;
       this.option[this.currentOption].status = true;
@@ -43,7 +54,17 @@ export class SelectBoxComponent implements OnInit {
     }
   }
 
-  boxClick(){
+  ngAfterViewChecked(){
+    //console.log("check:",this.InitOption)
+    //this.option = this.InitOption;
+  }
+
+  ngOnChanges(changes: SimpleChange){
+    //console.log(changes)
+    this.initial();
+  }
+
+  boxClick(): void{
     if(this.disabled){
       this.optionOpen=false;
     }
@@ -53,13 +74,14 @@ export class SelectBoxComponent implements OnInit {
     this.showHint=false;
   }
 
-  selectItem(index){
+  selectItem(index: number): void{
     for(let i = 0;i < this.option.length;i++){
       if(i == index){
         this.option[i].status = true;
         this.currentOption = index;
         this.word = this.option[i].detail;
         this.submitStatus = true;
+        this.selected.emit("selected");
       }
       else{
         this.option[i].status = false;
@@ -68,7 +90,7 @@ export class SelectBoxComponent implements OnInit {
     this.optionOpen = false;
   }
 
-  checkClick(){
+  checkClick(): void {
     this.disabled=!this.disabled;
     if(this.disabled){
       this.submitStatus = true;
@@ -82,7 +104,7 @@ export class SelectBoxComponent implements OnInit {
     this.optionOpen=false;
   }
 
-  getShowVal() {
+  getShowVal(): string {
     if(this.disabled){
       return this.defaultCheckboxValue;
     }
@@ -94,7 +116,7 @@ export class SelectBoxComponent implements OnInit {
     }
   }
 
-  getVal() {
+  getVal(): string {
     if(this.disabled){
       return this.defaultCheckboxValue;
     }
@@ -106,24 +128,29 @@ export class SelectBoxComponent implements OnInit {
     }
   }
 
-  getHint() {
+  getHint(): string {
     return this.hint;
   }
 
-  getSubmitStatus(){
+  getSubmitStatus(): boolean {
     return this.submitStatus;
   }
 
-  showServerInfo(serverHint) {
+  showServerInfo(serverHint: string): void {
     this.showHint = true;
     this.hint = serverHint;
   }
 
-  hideOption(){
+  hideOption(): void {
     this.optionOpen = false;
   }
 
-  setVal(value){
+  setOption(option): void{
+    this.initial();
+    this.option = option;
+  }
+
+  setVal(value: string): void{
     if(this.time && value == this.defaultCheckboxValue){
       this.disabled = true;
       this.word = value;
@@ -147,5 +174,4 @@ export class SelectBoxComponent implements OnInit {
       }
     }
   }
-
 }

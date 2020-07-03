@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'simple-input',
@@ -7,23 +7,32 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SimpleInputComponent implements OnInit {
 
-  private hint : String = '';
-  private showHint : boolean = false;
-  private val : String = '';
-  private submitStatus : boolean = false;
+  public hint : string = '';
+  public showHint : boolean = false;
+  public val : string = '';
+  public submitStatus : boolean = false;
   public optionList = [];
   public openList : boolean = false;
 
   @Input()
-  defaultWord : String = '';
+  defaultWord : string = '';
   @Input()
-  inputValue: String = '';
+  inputValue: string = '';
   @Input()
-  defaultHint : String = '';
+  defaultHint : string = '';
   @Input()
   patternInfo = [];
   @Input()
   optionInfo = [];
+
+  @Output()
+  beforeFocus = new EventEmitter<string>();
+  @Output()
+  focused = new EventEmitter<string>();
+  @Output()
+  beforeBlur = new EventEmitter<string>();
+  @Output()
+  blured = new EventEmitter<string>();
 
   constructor() { }
 
@@ -31,11 +40,14 @@ export class SimpleInputComponent implements OnInit {
     this.hint = this.defaultHint;
   }
 
-  focusAction(){
+  focusAction(): void {
+    this.beforeFocus.emit("beforeFocus");
     this.showHint = false;
+    this.focused.emit("focused");
   }
 
-  blurAction(){
+  blurAction(): void {
+    this.beforeBlur.emit("beforeBlur");
     // 循环匹配每项规则是否正确
     if(this.patternInfo != null){
       for(let i = 0;i < this.patternInfo.length;i++){
@@ -132,21 +144,22 @@ export class SimpleInputComponent implements OnInit {
     if(this.showHint){
       this.submitStatus = false;
     }
+    this.blured.emit("blured");
   }
 
-  valtrim(e){
+  valtrim(e: string): void {
     this.val = e.trim();
   }
 
-  getHint() {
+  getHint(): string {
     return this.hint;
   }
 
-  getVal() {
+  getVal(): string {
     return this.val.trim();
   }
 
-  getSubmitStatus() {
+  getSubmitStatus(): boolean {
     this.blurAction();
     if(!this.showHint){
       this.submitStatus = true;
@@ -157,24 +170,24 @@ export class SimpleInputComponent implements OnInit {
     return this.submitStatus;
   }
 
-  showServerInfo(serverInfo) {
+  showServerInfo(serverInfo: string): void {
     this.showHint = true;
     this.hint = serverInfo;
   }
 
-  setVal(value){
+  setVal(value: string): void{
     this.val = value;
     this.submitStatus = true;
   }
 
-  showList() {
+  showList(): void {
     this.optionList = this.optionInfo.filter((value,index,arr)=>{
       return value.Name.indexOf(this.val) > -1;
     });
     this.openList = true;
   }
 
-  setItem(e) {
+  setItem(e): void {
     if(e.target.nodeName === "P"){
       this.val = e.target.innerHTML;
       this.openList = false;
