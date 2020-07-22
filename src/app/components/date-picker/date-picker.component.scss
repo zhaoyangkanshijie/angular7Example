@@ -1,0 +1,118 @@
+.datePicker{
+    position: relative;
+    height: 32px;
+
+    .selection{
+        float: left;
+        position: relative;
+        width: 128px;
+        height: 32px;
+        box-sizing: border-box;
+        background: #FFFFFF;
+        border: 1px solid #CCCCCC;
+        border-radius: 2px;
+        background-image: url('../../../assets/dropdown_normal_grey.png');
+        background-size: 16px 16px;
+        background-repeat: no-repeat;
+        background-position: top 8px right 10px;
+        cursor: pointer;
+
+        &.active{
+            background-image: url('../../../assets/dropdown_grey_hover.png');
+            border: 1px solid #0099FF;
+        }
+
+        &.error{
+            border: 1px solid #FF3232;
+        }
+
+        .content{
+            font-size: 13px;
+            color: #999999;
+            line-height: 32px;
+            padding-left: 10px;
+
+            &.selected{
+                color: #333333;
+            }
+        }
+
+        .list{
+            width: 126px;
+            padding: 8px 0;
+            background: #FFFFFF;
+            box-shadow: 0 2px 10px 0 rgba(0,0,0,0.20);
+            max-height: 304px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            margin-top: 4px;
+            position: relative;
+
+            &::-webkit-scrollbar {
+                width: 16px;
+                height: 64px;
+            }
+            &::-webkit-scrollbar-thumb{
+                border-radius: 3px;
+                border: 6px solid rgba(0, 0, 0, 0);
+                box-shadow: 6px 0 0 #D8D8D8 inset;
+            }
+            // &::-o-scrollbar {
+            //     width: 16px;
+            //     height: 64px;
+            // }
+            // &::-o-scrollbar-thumb{
+            //     border-radius: 3px;
+            //     border: 6px solid rgba(0, 0, 0, 0);
+            //     box-shadow: 6px 0 0 #D8D8D8 inset;
+            // }
+            // &::-moz-scrollbar {
+            //     display: none;
+            // }
+            // &::-moz-scrollbar-thumb{
+            //     border-radius: 3px;
+            //     border: 6px solid rgba(0, 0, 0, 0);
+            //     box-shadow: 6px 0 0 #D8D8D8 inset;
+            // }
+
+            .item{
+                width: 126px;
+                height: 24px;
+                font-size: 12px;
+                color: #666666;
+                line-height: 24px;
+                padding-left: 36px;
+                box-sizing: border-box;
+
+                &:hover{
+                    background: #F2F9FF;
+                }
+
+                &.selected{
+                    background-image: url('../../../assets/Sure.png');
+                    background-size: 16px 16px;
+                    background-repeat: no-repeat;
+                    background-position: top 4px left 12px;
+                }
+            }
+        }
+    }
+
+    .word{
+        float: left;
+        font-size: 14px;
+        color: #333333;
+        line-height: 32px;
+        margin: 0px 16px 0 8px;
+    }
+
+    .hint{
+        float: left;
+        background-color: #FAECEB;
+        padding: 7px 12px;
+        font-size: 12px;
+        color: #FF3232;
+        line-height: 18px;
+        margin-left: 12px;
+    }
+}

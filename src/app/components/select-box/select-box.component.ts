@@ -159,6 +159,7 @@ export class SelectBoxComponent implements OnInit {
     else{
       let index = -1;
       for(let i = 0;i < this.option.length;i++){
+        this.option[i].status = false;
         if(value == this.option[i].detail){
           index = i;
         }

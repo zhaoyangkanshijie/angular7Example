@@ -1,0 +1,24 @@
+<div class="datePicker" (clickOutside)="yearOpen=false;monthOpen=false;dayOpen=false;">
+  <div class="selection" [ngClass]="{'active': yearOpen,'error': showHint}" (click)="yearBoxClick()">
+    <p class="content" [ngClass]="{'selected': isNumber(yearWord)}">{{yearWord}}</p>
+    <div class="list" *ngIf="yearOpen">
+      <p class="item" *ngFor="let yearItem of year;let i = index;" [ngClass]="{'selected': yearItem==yearWord.toString()}" (click)="yearClick(yearItem)">{{yearItem}}</p>
+    </div>
+  </div>
+  <p class="word">年</p>
+  <div class="selection" [ngClass]="{'active': monthOpen,'error': showHint}" (click)="monthBoxClick()">
+    <p class="content" [ngClass]="{'selected': isNumber(monthWord)}">{{monthWord}}</p>
+    <div class="list" *ngIf="monthOpen">
+      <p class="item" *ngFor="let monthItem of month;let j = index;" [ngClass]="{'selected': monthItem==monthWord.toString()}" (click)="monthClick(monthItem)">{{monthItem}}</p>
+    </div>
+  </div>
+  <p class="word">月</p>
+  <div class="selection" [ngClass]="{'active': dayOpen,'error': showHint}" *ngIf="showDay" (click)="dayBoxClick()">
+    <p class="content" [ngClass]="{'selected': isNumber(dayWord)}">{{dayWord}}</p>
+    <div class="list" *ngIf="dayOpen">
+      <p class="item" *ngFor="let dayItem of day;let k = index;" [ngClass]="{'selected': dayItem==dayWord.toString()}" (click)="dayClick(dayItem)">{{dayItem}}</p>
+    </div>
+  </div>
+  <p class="word" *ngIf="showDay">日</p>
+  <p class="hint" *ngIf="showHint">{{hint}}</p>
+</div>
