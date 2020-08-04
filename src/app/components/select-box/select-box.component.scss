@@ -76,10 +76,17 @@
         top: 36px;
         left: 0px;
         width: 318px;
+        max-height: 264px;
+        overflow-y: scroll;
+        overflow-x: hidden;
         padding: 8px 0;
         background: #FFFFFF;
         box-shadow: 0 2px 10px 0 rgba(0,0,0,0.20);
         z-index: 1;
+
+        &::-webkit-scrollbar{
+            width: 0;
+        }
 
         .item{
             background-color: #ffffff;
