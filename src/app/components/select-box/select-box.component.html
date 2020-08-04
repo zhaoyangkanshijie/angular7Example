@@ -1,11 +1,11 @@
 <div class="selectBox" (clickOutside)="optionOpen=false">
-  <p class="box" (click)="boxClick()" [ngClass]="{'open':(optionOpen&&!showHint&&!disabled),'error':showHint,'selected':(currentOption!=-1&&!disabled),'disabled':disabled}">{{getShowVal()}}</p>
+  <p class="box" (click)="boxClick()" [ngClass]="{'open':(optionOpen&&!showHint&&!disabled&&option.length>0),'error':showHint,'selected':(currentOption!=-1&&!disabled),'disabled':disabled}">{{getShowVal()}}</p>
   <p class="hint" *ngIf="showHint">{{hint}}</p>
   <div class="checkbox" *ngIf="!showHint&&time">
     <div class="check" (click)="checkClick()" [ngClass]="{'choose':disabled}"></div>
     <p class="word">{{defaultCheckboxValue}}</p>
   </div>
-  <ul class="selection" *ngIf="optionOpen&&!disabled">
+  <ul class="selection" *ngIf="optionOpen&&!disabled&&option.length>0">
     <li class="item" *ngFor="let item of option;let i = index;" (click)="selectItem(i)">
       <div class="status" [ngClass]="{'selected':item.status}"></div>
       <p class="detail">{{item.detail}}</p>
